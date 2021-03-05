@@ -20,6 +20,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.mycompany.ductumejb.entidade.Entidade;
+
 /**
  *
  * @author Deyse
@@ -40,7 +42,7 @@ import org.hibernate.validator.constraints.NotBlank;
             )
         }
 )
-public class Order implements Serializable {
+public class Order  extends Entidade implements Serializable {
   
 	/**
 	 * 
@@ -57,7 +59,7 @@ public class Order implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "UserSuperId")
-    protected UserSuper UserSuper;
+    protected model.entities.UserSuper UserSuper;
 
 	@NotBlank
     @Column(name="destination")

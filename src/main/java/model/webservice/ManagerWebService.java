@@ -36,7 +36,7 @@ public class ManagerWebService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Manager createGame(@Context HttpServletRequest request) {
+    public Manager createManager(@Context HttpServletRequest request) {
         Manager Manager = new Manager();
         HttpSession session = request.getSession();
         session.setAttribute("Manager", Manager);

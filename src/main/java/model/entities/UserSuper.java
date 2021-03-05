@@ -1,5 +1,6 @@
-
 package model.entities;
+
+
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -24,7 +25,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
-
 /**
  *
  * @author Deyse
@@ -35,7 +35,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @DiscriminatorColumn(name = "disc_user", //Nome da coluna que vai discriminar subclasses.
         discriminatorType = DiscriminatorType.STRING, length = 1)
 @Access(AccessType.FIELD)
-public abstract class UserSuper  extends Entidade implements Serializable {
+public abstract class UserSuper extends Entidade implements Serializable {
     
     /**
 	 * 
@@ -176,86 +176,22 @@ public abstract class UserSuper  extends Entidade implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((created == null) ? 0 : created.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((externalId == null) ? 0 : externalId.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lastLogin == null) ? 0 : lastLogin.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + status;
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+		// TODO Auto-generated method stub
+		return super.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserSuper other = (UserSuper) obj;
-		if (created == null) {
-			if (other.created != null)
-				return false;
-		} else if (!created.equals(other.created))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (externalId == null) {
-			if (other.externalId != null)
-				return false;
-		} else if (!externalId.equals(other.externalId))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (lastLogin == null) {
-			if (other.lastLogin != null)
-				return false;
-		} else if (!lastLogin.equals(other.lastLogin))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (phoneNumber == null) {
-			if (other.phoneNumber != null)
-				return false;
-		} else if (!phoneNumber.equals(other.phoneNumber))
-			return false;
-		if (status != other.status)
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+	public boolean equals(Object object) {
+		// TODO Auto-generated method stub
+		return super.equals(object);
 	}
 
 	@Override
 	public String toString() {
-		return "UserSuper [id=" + id + ", username=" + username + ", name=" + name + ", email=" + email + ", password="
-				+ password + ", phoneNumber=" + phoneNumber + ", externalId=" + externalId + ", created=" + created
-				+ ", lastLogin=" + lastLogin + ", status=" + status + "]";
+		// TODO Auto-generated method stub
+		return super.toString();
 	}
-    
+	
+	
     
 }

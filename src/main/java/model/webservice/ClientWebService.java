@@ -36,7 +36,7 @@ public class ClientWebService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ClientUser createGame(@Context HttpServletRequest request) {
+    public ClientUser createClient(@Context HttpServletRequest request) {
         ClientUser clientUser = new ClientUser();
         HttpSession session = request.getSession();
         session.setAttribute("clientUser", clientUser);

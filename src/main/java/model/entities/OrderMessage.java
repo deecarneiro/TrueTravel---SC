@@ -37,7 +37,7 @@ import javax.persistence.Table;
             )
         }
 )
-public class OrderMessage implements Serializable {
+public class OrderMessage extends Entidade implements Serializable {
   
 	/**
 	 * 

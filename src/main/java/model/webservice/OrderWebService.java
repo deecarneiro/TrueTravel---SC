@@ -36,7 +36,7 @@ public class OrderWebService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Order createGame(@Context HttpServletRequest request) {
+    public Order createOrder(@Context HttpServletRequest request) {
         Order Order = new Order();
         HttpSession session = request.getSession();
         session.setAttribute("Order", Order);

@@ -34,7 +34,7 @@ import model.entities.UserSuper;
 @Path("client")
 public class OrderWebService {
 
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Order createOrder(@Context HttpServletRequest request) {
         Order Order = new Order();

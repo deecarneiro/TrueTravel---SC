@@ -34,7 +34,7 @@ import model.entities.UserSuper;
 @Path("client")
 public class ManagerWebService {
 
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Manager createManager(@Context HttpServletRequest request) {
         Manager Manager = new Manager();

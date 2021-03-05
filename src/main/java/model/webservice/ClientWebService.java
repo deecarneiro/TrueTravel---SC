@@ -34,7 +34,7 @@ import model.entities.UserSuper;
 @Path("client")
 public class ClientWebService {
 
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
     public ClientUser createClient(@Context HttpServletRequest request) {
         ClientUser clientUser = new ClientUser();

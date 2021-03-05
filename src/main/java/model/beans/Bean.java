@@ -1,5 +1,6 @@
 package model.beans;
 
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;

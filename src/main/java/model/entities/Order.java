@@ -2,21 +2,23 @@
 package model.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.br.CNPJ;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -29,40 +31,137 @@ import org.hibernate.validator.constraints.br.CNPJ;
 @NamedQueries(
         {
             @NamedQuery(
-                    name = Client.ALL_CLIENTS,
-                    query = "SELECT c FROM Client c"
+                    name = Order.ALL_ORDERS,
+                    query = "SELECT o FROM Order o"
             ),
              @NamedQuery(
-                    name = Client.PASS_AND_LOGIN,
-                    query = "SELECT c FROM Client c WHERE c.login = ?1 AND c.password = ?2 "
+                    name = Order.ORDER_BY_ID,
+                    query = "SELECT o FROM Order o WHERE o.id = ?"
             )
         }
 )
 public class Order implements Serializable {
+  
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4533649529217112074L;
+	public static final String ALL_ORDERS = "All_Orders";
+    public static final String ORDER_BY_ID= "Order_By_Id";
+
+
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected Long id;
     
-    public static final String ALL_CLIENTS = "All_Clients";
-    public static final String PASS_AND_LOGIN= "Client_By_Id";
+    @ManyToOne
+    @JoinColumn(name = "UserSuperId")
+    protected UserSuper UserSuper;
 
-
+	@NotBlank
+    @Column(name="destination")
+    protected String destination;
+    
+    @NotBlank
+    @Column(name="origin")
+    protected String origin;
+    
+    @NotBlank
+    @Temporal(TemporalType.TIME)
+    @Column(name="departureDate")
+    protected Date departureDate;
+    
+    @NotBlank
+    @Temporal(TemporalType.TIME)
+    @Column(name="arrivalDate")
+    protected Date arrivalDate;
+    
+    @NotBlank
+    @Column(name="agencyName")
+    protected String agencyName;
+    
+    @NotBlank
+    @Column(name="cost")
+    protected double cost;
+    
+    @Column(name="status")
+    protected int status;
     
     
-    @NotNull
-    @CNPJ 
-    @Column(name = "cnpj")
-    private String cnpj;
-    
+    public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getCnpj() {
-        return cnpj;
-    }
+    public UserSuper getUserSuper() {
+		return UserSuper;
+	}
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
+	public void setUserSuper(UserSuper UserSuper) {
+		this.UserSuper = UserSuper;
+	}
+	
+	public String getDestination() {
+		return destination;
+	}
 
- 
-    @Override
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
+	public Date getDepartureDate() {
+		return departureDate;
+	}
+
+	public void setDepartureDate(Date departureDate) {
+		this.departureDate = departureDate;
+	}
+
+	public Date getArrivalDate() {
+		return arrivalDate;
+	}
+
+	public void setArrivalDate(Date arrivalDate) {
+		this.arrivalDate = arrivalDate;
+	}
+
+	public String getAgencyName() {
+		return agencyName;
+	}
+
+	public void setAgencyName(String agencyName) {
+		this.agencyName = agencyName;
+	}
+
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
@@ -72,24 +171,23 @@ public class Order implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Client)) {
+        if (!(object instanceof Order)) {
             return false;
         }
-        Client other = (Client) object;
+        Order other = (Order) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
 
-    @Override
-    public String toString() {
-       StringBuilder sb = new StringBuilder("Entity.Client[");
-        sb.append(super.toString());
-        sb.append(", ");
-        sb.append(this.cnpj);
-        sb.append("]");
-        return sb.toString();
-    }
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", UserSuper=" + UserSuper + ", destination=" + destination + ", origin=" + origin
+				+ ", departureDate=" + departureDate + ", arrivalDate=" + arrivalDate + ", agencyName=" + agencyName
+				+ ", cost=" + cost + ", status=" + status + "]";
+	}
+    
+    
     
 }

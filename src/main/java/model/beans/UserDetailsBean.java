@@ -10,6 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import model.service.UserDetailsService;
 
 /**
  *
@@ -22,8 +23,8 @@ public class UserDetailsBean{
 
     @EJB
     private UserDetailsService serviceUserDetails;
-    private UserDetails UserDetails = new UserDetails();
-    List<UserDetails> lista = new ArrayList<>();
+    private UserDetails UserDetails = new UserDetails() {};
+    List<UserDetails> lista = new ArrayList<UserDetails>();
     
     public void iniciarCampos() {
       serviceUserDetails.criar();

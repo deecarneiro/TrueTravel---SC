@@ -20,8 +20,6 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.mycompany.ductumejb.entidade.Entidade;
-
 /**
  *
  * @author Deyse

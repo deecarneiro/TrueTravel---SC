@@ -10,6 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import model.service.ProjectService;
 
 /**
  *
@@ -23,7 +24,7 @@ public class ProjectBean{
     @EJB
     private ProjectService serviceProject;
     private Project Project = new Project();
-    List<Project> lista = new ArrayList<>();
+    List<Project> lista = new ArrayList<Project>();
     
     public void iniciarCampos() {
       serviceProject.criar();

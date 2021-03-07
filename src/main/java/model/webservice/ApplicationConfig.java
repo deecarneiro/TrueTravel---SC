@@ -41,11 +41,11 @@
  * Version 2 license, then the option applies only if the new code is
  * made subject to such option by the copyright holder.
  */
-package webservice;
+package model.webservice;
 
 import javax.ws.rs.core.Application;
 
-@javax.ws.rs.ApplicationPath("resources")
+@javax.ws.rs.ApplicationPath("")
 public class ApplicationConfig extends Application {
 
 }

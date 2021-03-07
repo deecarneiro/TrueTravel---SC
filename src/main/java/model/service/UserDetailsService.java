@@ -1,5 +1,9 @@
+/*
+ * To change this license header, choose License Headers in UserDetails Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package model.service;
-
 
 import java.util.List;
 import javax.ejb.LocalBean;
@@ -9,43 +13,42 @@ import static javax.ejb.TransactionAttributeType.SUPPORTS;
 import javax.validation.executable.ExecutableType;
 import javax.validation.executable.ValidateOnExecution;
 
-import model.service.Servico;
-
-import model.entities.Order;
+import model.entities.UserDetails;
 
 /**
  *
  * @author deecarneiro
  */
+
 @LocalBean
 @ValidateOnExecution(type = ExecutableType.ALL)
-public class OrderService extends Servico<Order> {
+public class UserDetailsService extends Servico<UserDetails> {
 
     @Override
-    public Order criar() {
-        return new Order();
+    public UserDetails criar() {
+        return new UserDetails() {};
     }
     
      @Override
-    public void persistir(Order entidade) {
+    public void persistir(UserDetails entidade) {
         entityManager.persist(entidade);//To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Order atualizar(Order entidade) {
+    public UserDetails atualizar(UserDetails entidade) {
         entityManager.merge(entidade);
         entityManager.flush();
         return entidade;
     }
 
-    public void remover(Order entidade) {
+    public void remover(UserDetails entidade) {
         entidade = entityManager.merge(entidade);
         entityManager.remove(entidade);
 
     }
 
     @TransactionAttribute(SUPPORTS)
-    public List<Order> consultarEntidades() {
-       return consultarEntidades( new Object[] {}, Order.ALL_ORDERS);
+    public List<UserDetails> consultarEntidades() {
+       return consultarEntidades( new Object[] {}, UserDetails.ALL_USER_DETAILS);
     }
 }

@@ -6,36 +6,52 @@
 package model.webservice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.Produces; 
+import javax.ws.rs.Produces;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
- 
-import model.entities.Order;
 
 /**
  * REST Web Service
  *
  * @author deecarneiro
  */
-@Path("client")
-public class OrderWebService {
+@Path("generic")
+public class GenericResource {
 
-    @POST
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Order createOrder(@Context HttpServletRequest request) {
-        Order Order = new Order();
+    public String createGame(@Context HttpServletRequest request) {
+        String genius = "Server REST API rodando...";
         HttpSession session = request.getSession();
-        session.setAttribute("Order", Order);
-        return Order;
+        session.setAttribute("genius", genius);
+        return genius;
     }
 
+//    @POST
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Genius playSequence(@Context HttpServletRequest request, String numbers) {
+//        HttpSession session = request.getSession();
+//        Genius g = (Genius) session.getAttribute("genius");
+//        List<Integer> sequencePlayed = new ArrayList<Integer>();
+//        if (numbers.contains(",")) {
+//            ArrayList<String> strNumbers = new ArrayList<String>(Arrays.asList(numbers.split(",")));
+//            sequencePlayed.addAll(getIntegerArray(strNumbers));
+//        } else {
+//            sequencePlayed.add(Integer.parseInt(numbers));
+//        }
+//        g = g.playSequence(sequencePlayed);
+//        return g;
+//    }
 
     private ArrayList<Integer> getIntegerArray(ArrayList<String> stringArray) {
         ArrayList<Integer> result = new ArrayList<Integer>();
@@ -52,7 +68,7 @@ public class OrderWebService {
 
         private WebTarget webTarget;
         private Client client;
-        private static final String BASE_URI = "http://localhost:8080/order/resources";
+        private static final String BASE_URI = "http://localhost:8080/TrueTravel/";
 
         public GenericResource_JerseyClient() {
             client = javax.ws.rs.client.ClientBuilder.newClient();

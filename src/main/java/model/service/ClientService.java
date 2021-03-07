@@ -19,7 +19,6 @@ import model.entities.ClientUser;
  *
  * @author deecarneiro
  */
-@Stateless
 @LocalBean
 @ValidateOnExecution(type = ExecutableType.ALL)
 public class ClientService extends Servico<ClientUser> {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="model/entities/|model/beans/|model/managed/|model/persistence/|model/service/|webservice/|model/webservice/" kind="src" output="target/classes" path="src/main/java">
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
@@ -18,35 +18,15 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
-			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/deecarneiro/.m2/repository/javax/enterprise/cdi-api/2.0/cdi-api-2.0.jar" sourcepath="/home/deecarneiro/.m2/repository/javax/enterprise/cdi-api/2.0/cdi-api-2.0-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
-			<attribute name="maven.groupId" value="javax.enterprise"/>
-			<attribute name="maven.artifactId" value="cdi-api"/>
-			<attribute name="maven.version" value="2.0"/>
-			<attribute name="maven.scope" value="provided"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/deecarneiro/.m2/repository/org/hibernate/hibernate-validator/5.4.2.Final/hibernate-validator-5.4.2.Final.jar" sourcepath="/home/deecarneiro/.m2/repository/org/hibernate/hibernate-validator/5.4.2.Final/hibernate-validator-5.4.2.Final-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="org.eclipse.jst.component.archivename" value="hibernate-validator-5.4.2.Final.jar"/>
-			<attribute name="maven.groupId" value="org.hibernate"/>
-			<attribute name="maven.artifactId" value="hibernate-validator"/>
-			<attribute name="maven.version" value="5.4.2.Final"/>
-			<attribute name="maven.scope" value="compile"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>

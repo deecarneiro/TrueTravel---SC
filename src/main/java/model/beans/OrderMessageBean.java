@@ -10,6 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import model.service.OrderMessageService;
 
 /**
  *
@@ -23,7 +24,7 @@ public class OrderMessageBean{
     @EJB
     private OrderMessageService serviceOrderMessage;
     private OrderMessage OrderMessage = new OrderMessage();
-    List<OrderMessage> lista = new ArrayList<>();
+    List<OrderMessage> lista = new ArrayList<OrderMessage>();
     
     public void iniciarCampos() {
       serviceOrderMessage.criar();

@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
@@ -22,13 +24,26 @@ import org.hibernate.validator.constraints.br.CPF;
 @Table(name="user_details") 
 @DiscriminatorValue(value = "ud")
 @PrimaryKeyJoinColumn(name="id_user_details", referencedColumnName = "id")
+@NamedQueries(
+        {
+            @NamedQuery(
+                    name = UserDetails.ALL_USER_DETAILS,
+                    query = "SELECT d FROM UserDetails d"
+            ),
+             @NamedQuery(
+                    name = UserDetails.USER_DETAILS_BY_ID,
+                    query = "SELECT d FROM UserDails d WHERE d.id = ?"
+            )
+        }
+)
 public abstract class UserDetails  extends Entidade implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6878819548775036147L;
-    
+    public static final String ALL_USER_DETAILS = "All_User_Deatils";
+    public static final String USER_DETAILS_BY_ID= "User_Details_By_Id";
 	@Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,6 +68,20 @@ public abstract class UserDetails  extends Entidade implements Serializable {
 	@NotBlank
 	@Column(name="permission")
 	protected int permission;
+
+    public UserDetails(Long id, String photo, String passport, String rg, String cpf, int permission) {
+        this.id = id;
+        this.photo = photo;
+        this.passport = passport;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.permission = permission;
+    }
+
+    public UserDetails() {
+    }
+        
+        
 
 	public Long getId() {
 		return id;

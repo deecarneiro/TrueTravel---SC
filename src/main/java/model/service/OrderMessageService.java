@@ -3,7 +3,6 @@ package model.service;
 
 import java.util.List;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.SUPPORTS;
 import javax.validation.executable.ExecutableType;
@@ -11,41 +10,42 @@ import javax.validation.executable.ValidateOnExecution;
 
 import model.service.Servico;
 
-import model.entities.Order;
+import model.entities.OrderMessage;
 
 /**
  *
  * @author deecarneiro
  */
+
 @LocalBean
 @ValidateOnExecution(type = ExecutableType.ALL)
-public class OrderService extends Servico<Order> {
+public class OrderMessageService extends Servico<OrderMessage> {
 
     @Override
-    public Order criar() {
-        return new Order();
+    public OrderMessage criar() {
+        return new OrderMessage();
     }
     
      @Override
-    public void persistir(Order entidade) {
+    public void persistir(OrderMessage entidade) {
         entityManager.persist(entidade);//To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Order atualizar(Order entidade) {
+    public OrderMessage atualizar(OrderMessage entidade) {
         entityManager.merge(entidade);
         entityManager.flush();
         return entidade;
     }
 
-    public void remover(Order entidade) {
+    public void remover(OrderMessage entidade) {
         entidade = entityManager.merge(entidade);
         entityManager.remove(entidade);
 
     }
 
     @TransactionAttribute(SUPPORTS)
-    public List<Order> consultarEntidades() {
-       return consultarEntidades( new Object[] {}, Order.ALL_ORDERS);
+    public List<OrderMessage> consultarEntidades() {
+       return consultarEntidades( new Object[] {}, OrderMessage.ALL_MESSAGE_ORDER);
     }
 }

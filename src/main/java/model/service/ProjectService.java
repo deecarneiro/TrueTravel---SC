@@ -19,7 +19,6 @@ import model.entities.Project;
  *
  * @author deecarneiro
  */
-@Stateless
 @LocalBean
 @ValidateOnExecution(type = ExecutableType.ALL)
 public class ProjectService extends Servico<Project> {

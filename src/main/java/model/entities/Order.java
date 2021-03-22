@@ -2,10 +2,11 @@
 package model.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+
+import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +28,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Table(name="order") 
 @DiscriminatorValue(value = "o")
-@PrimaryKeyJoinColumn(name="id_order", referencedColumnName = "id")
 @NamedQueries(
         {
             @NamedQuery(
@@ -36,7 +36,7 @@ import org.hibernate.validator.constraints.NotBlank;
             ),
              @NamedQuery(
                     name = Order.ORDER_BY_ID,
-                    query = "SELECT o FROM Order o WHERE o.id = ?"
+                    query = "SELECT o FROM Order o WHERE o.id = ?1"
             )
         }
 )

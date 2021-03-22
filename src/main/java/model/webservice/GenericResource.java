@@ -37,22 +37,6 @@ public class GenericResource {
         return genius;
     }
 
-//    @POST
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Genius playSequence(@Context HttpServletRequest request, String numbers) {
-//        HttpSession session = request.getSession();
-//        Genius g = (Genius) session.getAttribute("genius");
-//        List<Integer> sequencePlayed = new ArrayList<Integer>();
-//        if (numbers.contains(",")) {
-//            ArrayList<String> strNumbers = new ArrayList<String>(Arrays.asList(numbers.split(",")));
-//            sequencePlayed.addAll(getIntegerArray(strNumbers));
-//        } else {
-//            sequencePlayed.add(Integer.parseInt(numbers));
-//        }
-//        g = g.playSequence(sequencePlayed);
-//        return g;
-//    }
-
     private ArrayList<Integer> getIntegerArray(ArrayList<String> stringArray) {
         ArrayList<Integer> result = new ArrayList<Integer>();
         for (String stringValue : stringArray) {

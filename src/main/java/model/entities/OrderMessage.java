@@ -2,6 +2,8 @@
 package model.entities;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -24,16 +26,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name="message") 
 @DiscriminatorValue(value = "m")
-@PrimaryKeyJoinColumn(name="id_message", referencedColumnName = "id")
 @NamedQueries(
         {
             @NamedQuery(
                     name = OrderMessage.ALL_MESSAGE_ORDER,
-                    query = "SELECT m FROM OrderMessageMessage m"
+                    query = "SELECT m FROM OrderMessage m"
             ),
              @NamedQuery(
                     name = OrderMessage.ORDER_MESSAGE_BY_ID,
-                    query = "SELECT m FROM OrderMessageMessage m WHERE m.id = ?"
+                    query = "SELECT m FROM OrderMessage m WHERE m.id = ?1"
             )
         }
 )
@@ -58,7 +59,7 @@ public class OrderMessage extends Entidade implements Serializable {
 
 	@OneToMany
     @JoinColumn(name = "orderId")
-    protected Order order;
+    protected List<Order> order;
   
 	
 
@@ -82,12 +83,12 @@ public class OrderMessage extends Entidade implements Serializable {
 	}
 
 
-	public Order getOrder() {
+	public List<Order> getOrder() {
 		return order;
 	}
 
 
-	public void setOrder(Order order) {
+	public void setOrder(List<Order> order) {
 		this.order = order;
 	}
 

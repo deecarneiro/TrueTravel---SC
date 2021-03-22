@@ -26,7 +26,7 @@ import org.hibernate.validator.constraints.br.CPF;
             ),
              @NamedQuery(
                     name = Manager.PASS_AND_LOGIN,
-                    query = "SELECT e FROM Manager e WHERE e.login = ?1 AND e.password = ?2"
+                    query = "SELECT e FROM Manager e WHERE e.username = ?1 AND e.password = ?2"
             )
         }
 )

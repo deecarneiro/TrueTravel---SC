@@ -23,8 +23,8 @@ import org.hibernate.validator.constraints.br.CNPJ;
 @Table(name = "TB_CLIENT")
 @DiscriminatorValue(value = "C")
 @PrimaryKeyJoinColumn(name = "ID_USER", referencedColumnName = "ID")
-@NamedQueries({ @NamedQuery(name = ClientUser.ALL_CLIENTS, query = "SELECT c FROM Client c"),
-		@NamedQuery(name = ClientUser.PASS_AND_LOGIN, query = "SELECT c FROM Client c WHERE c.login = ?1 AND c.password = ?2 "), }
+@NamedQueries({ @NamedQuery(name = ClientUser.ALL_CLIENTS, query = "SELECT c FROM ClientUser c"),
+		@NamedQuery(name = ClientUser.PASS_AND_LOGIN, query = "SELECT c FROM ClientUser c WHERE c.username = ?1 AND c.password = ?2 "), }
 
 )
 public class ClientUser extends UserSuper implements Serializable {

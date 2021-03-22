@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="TrueTravel_TrueTravel_war_1.0-SNAPSHOTPU" transaction-type="JTA">
+    <jta-data-source>java:app/truetravel</jta-data-source>
+    <class>model.entities.ClientUser</class>
+    <class>model.entities.Manager</class>
+    <class>model.entities.Order</class>
+    <class>model.entities.OrderMessage</class>
+    <class>model.entities.Project</class>
+    <class>model.entities.UserDetails</class>
+    <class>model.entities.UserSuper</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+  </persistence-unit>
+</persistence>

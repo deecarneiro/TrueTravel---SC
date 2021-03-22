@@ -24,7 +24,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Table(name="project") 
 @DiscriminatorValue(value = "p")
-@PrimaryKeyJoinColumn(name="id_project", referencedColumnName = "id")
 @NamedQueries(
         {
             @NamedQuery(
@@ -33,7 +32,7 @@ import org.hibernate.validator.constraints.NotBlank;
             ),
              @NamedQuery(
                     name = Project.PROJECT_BY_ID,
-                    query = "SELECT p FROM Project p WHERE p.id = ?"
+                    query = "SELECT p FROM Project p WHERE p.id = ?1"
             )
         }
 )

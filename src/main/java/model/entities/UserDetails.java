@@ -22,8 +22,6 @@ import org.hibernate.validator.constraints.br.CPF;
  */
 @Entity
 @Table(name="user_details") 
-@DiscriminatorValue(value = "ud")
-@PrimaryKeyJoinColumn(name="id_user_details", referencedColumnName = "id")
 @NamedQueries(
         {
             @NamedQuery(
@@ -32,7 +30,7 @@ import org.hibernate.validator.constraints.br.CPF;
             ),
              @NamedQuery(
                     name = UserDetails.USER_DETAILS_BY_ID,
-                    query = "SELECT d FROM UserDails d WHERE d.id = ?"
+                    query = "SELECT d FROM UserDetails d WHERE d.id = ?1"
             )
         }
 )
@@ -78,10 +76,14 @@ public abstract class UserDetails  extends Entidade implements Serializable {
         this.permission = permission;
     }
 
-    public UserDetails() {
-    }
+  
         
         
+
+	public UserDetails() {
+		super();
+	}
+
 
 	public Long getId() {
 		return id;

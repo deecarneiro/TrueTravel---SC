@@ -24,7 +24,7 @@ import javax.persistence.Table;
  * @author Deyse
  */
 @Entity
-@Table(name="message") 
+@Table(name="TB_MESSAGE") 
 @DiscriminatorValue(value = "m")
 @NamedQueries(
         {

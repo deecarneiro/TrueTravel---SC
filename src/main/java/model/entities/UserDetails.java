@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.br.CPF;
  * @author Deyse
  */
 @Entity
-@Table(name="user_details") 
+@Table(name="TB_USER_DETAILS") 
 @NamedQueries(
         {
             @NamedQuery(
@@ -34,7 +34,7 @@ import org.hibernate.validator.constraints.br.CPF;
             )
         }
 )
-public abstract class UserDetails  extends Entidade implements Serializable {
+public class UserDetails  extends Entidade implements Serializable {
 
 	/**
 	 * 
@@ -67,21 +67,10 @@ public abstract class UserDetails  extends Entidade implements Serializable {
 	@Column(name="permission")
 	protected int permission;
 
-    public UserDetails(Long id, String photo, String passport, String rg, String cpf, int permission) {
-        this.id = id;
-        this.photo = photo;
-        this.passport = passport;
-        this.rg = rg;
-        this.cpf = cpf;
-        this.permission = permission;
-    }
-
   
-        
-        
-
 	public UserDetails() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 

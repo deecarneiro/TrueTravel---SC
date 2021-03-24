@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.GET;
 import javax.ws.rs.Produces; 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -24,16 +25,15 @@ import model.entities.Order;
  *
  * @author deecarneiro
  */
-@Path("client")
+@Path("order")
 public class OrderWebService {
 
-    @POST
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Order createOrder(@Context HttpServletRequest request) {
-        Order Order = new Order();
+    public String createOrder(@Context HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.setAttribute("Order", Order);
-        return Order;
+        session.setAttribute("Order", "TESTE");
+        return "TEST";
     }
 
 
@@ -52,14 +52,14 @@ public class OrderWebService {
 
         private WebTarget webTarget;
         private Client client;
-        private static final String BASE_URI = "http://localhost:8080/order/resources";
+        private static final String BASE_URI = "http://localhost:8080/TrueTravel/";
 
         public GenericResource_JerseyClient() {
             client = javax.ws.rs.client.ClientBuilder.newClient();
-            webTarget = client.target(BASE_URI).path("generic");
+            webTarget = client.target(BASE_URI).path("order");
         }
 
-        public <T> T createGame(Class<T> responseType) throws ClientErrorException {
+        public <T> T createOrder(Class<T> responseType) throws ClientErrorException {
             WebTarget resource = webTarget;
             return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
         }

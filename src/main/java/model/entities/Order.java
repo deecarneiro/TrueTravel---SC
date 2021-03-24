@@ -26,7 +26,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author Deyse
  */
 @Entity
-@Table(name="order") 
+@Table(name="TB_ORDER") 
 @DiscriminatorValue(value = "o")
 @NamedQueries(
         {

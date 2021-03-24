@@ -22,7 +22,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author Deyse
  */
 @Entity
-@Table(name="project") 
+@Table(name="TB_PROJECT") 
 @DiscriminatorValue(value = "p")
 @NamedQueries(
         {

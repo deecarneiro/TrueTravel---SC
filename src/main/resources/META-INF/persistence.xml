@@ -7,8 +7,8 @@
     <class>model.entities.Order</class>
     <class>model.entities.OrderMessage</class>
     <class>model.entities.Project</class>
-    <class>model.entities.UserDetails</class>
     <class>model.entities.UserSuper</class>
+    <class>model.entities.UserDetails</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

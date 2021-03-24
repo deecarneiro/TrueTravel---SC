@@ -20,9 +20,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import model.entities.ClientUser;
-import model.service.ClientService;
-
 /**
  * REST Web Service
  *
@@ -33,31 +30,12 @@ public class ClientWebService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean list(@Context HttpServletRequest request) {
-    	ClientService service = new ClientService();
-    	ClientUser clients = new ClientUser();
-    	boolean test = service.existe(clients);
+    public String createGame(@Context HttpServletRequest request) {
+        String genius = "Server REST API rodando...";
         HttpSession session = request.getSession();
-        session.setAttribute("clients", clients);
-        System.out.println("CLIENTS"+ clients);
-        return test;
+        session.setAttribute("genius", genius);
+        return genius;
     }
-
-//    @POST
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Genius playSequence(@Context HttpServletRequest request, String numbers) {
-//        HttpSession session = request.getSession();
-//        Genius g = (Genius) session.getAttribute("genius");
-//  eclipse-javadoc:%E2%98%82=TrueTravel-Backend/%5C/home%5C/deecarneiro%5C/.m2%5C/repository%5C/javax%5C/javaee-web-api%5C/7.0%5C/javaee-web-api-7.0.jar=/maven.pomderived=/true=/=/org.eclipse.jst.component.dependency=/%5C/WEB-INF%5C/lib=/=/maven.pomderived=/true=/=/org.eclipse.jst.component.nondependency=/=/=/maven.groupId=/javax=/=/maven.artifactId=/javaee-web-api=/=/maven.version=/7.0=/=/maven.scope=/provided=/%3Cjavax      List<Integer> sequencePlayed = new ArrayList<Integer>();
-//        if (numbers.contains(",")) {
-//            ArrayList<String> strNumbers = new ArrayList<String>(Arrays.asList(numbers.split(",")));
-//            sequencePlayed.addAll(getIntegerArray(strNumbers));
-//        } else {
-//            sequencePlayed.add(Integer.parseInt(numbers));
-//        }
-//        g = g.playSequence(sequencePlayed);
-//        return g;
-//    }
 
     private ArrayList<Integer> getIntegerArray(ArrayList<String> stringArray) {
         ArrayList<Integer> result = new ArrayList<Integer>();
@@ -74,14 +52,14 @@ public class ClientWebService {
 
         private WebTarget webTarget;
         private Client client;
-        private static final String BASE_URI = "http://localhost:8080/TrueTravel/";
+        private static final String BASE_URI = "http://localhost:8080/TrueTravel";
 
         public GenericResource_JerseyClient() {
             client = javax.ws.rs.client.ClientBuilder.newClient();
             webTarget = client.target(BASE_URI).path("client");
         }
 
-        public <T> T list(Class<T> responseType) throws ClientErrorException {
+        public <T> T createGame(Class<T> responseType) throws ClientErrorException {
             WebTarget resource = webTarget;
             return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
         }

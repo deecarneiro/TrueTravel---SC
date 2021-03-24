@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.br.CPF;
  * @author Deyse
  */
 @Entity
-@Table(name="TB_Manager") 
+@Table(name="TB_MANAGER") 
 @DiscriminatorValue(value = "E")
 @PrimaryKeyJoinColumn(name="ID_USER", referencedColumnName = "ID")
 @NamedQueries(

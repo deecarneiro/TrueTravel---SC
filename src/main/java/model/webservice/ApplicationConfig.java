@@ -45,7 +45,7 @@ package model.webservice;
 
 import javax.ws.rs.core.Application;
 
-@javax.ws.rs.ApplicationPath("")
+@javax.ws.rs.ApplicationPath("services")
 public class ApplicationConfig extends Application {
 
 }

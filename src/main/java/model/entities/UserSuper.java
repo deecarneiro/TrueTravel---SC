@@ -30,7 +30,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author Deyse
  */
 @Entity
-@Table(name = "TB_USER_SUPER")
+@Table(name = "TB_USER")
 @Inheritance(strategy = InheritanceType.JOINED) //Estratégia de herança.
 @DiscriminatorColumn(name = "disc_user", //Nome da coluna que vai discriminar subclasses.
         discriminatorType = DiscriminatorType.STRING, length = 1)

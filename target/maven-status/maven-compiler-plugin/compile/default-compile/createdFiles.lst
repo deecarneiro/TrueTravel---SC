@@ -21,6 +21,7 @@ model/entities/UserSuper.class
 model/webservice/OrderMessageWebService.class
 model/webservice/ClientWebService$ClientWebService_JerseyClient.class
 model/entities/OrderMessage_.class
+main/DbUnitUtil.class
 model/entities/UserSuper_.class
 model/entities/ClientUser.class
 model/entities/Manager_.class

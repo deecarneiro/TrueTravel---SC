@@ -50,7 +50,7 @@ public class OrderWebService {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getById(@Context HttpServletRequest request, @PathParam("id") int id) {
-		return "STRING";
+		return "ORDER";
 
 	}
 
@@ -68,7 +68,7 @@ public class OrderWebService {
 	public String remove(@Context HttpServletRequest request, @PathParam("id") int id) {
 		HttpSession session = request.getSession();
 		session.setAttribute("Order", "TESTE");
-		return "STRING";
+		return "ORDER";
 
 	}
 

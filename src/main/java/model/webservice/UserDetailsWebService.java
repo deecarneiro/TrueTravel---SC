@@ -23,19 +23,19 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import model.entities.ClientUser;
+import model.entities.UserDetails;
 /**
  * REST Web Service
  *
  * @author deecarneiro
  */
-@Path("client")
-public class ClientWebService {
+@Path("userdetails")
+public class UserDetailsWebService {
 
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClientUser create(@Context HttpServletRequest request, ClientUser user) {
+	public UserDetails create(@Context HttpServletRequest request, UserDetails user) {
 		HttpSession session = request.getSession();
 		session.setAttribute("Client", "TESTE");
 		return null;
@@ -43,7 +43,7 @@ public class ClientWebService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClientUser list(@Context HttpServletRequest request) {
+	public UserDetails list(@Context HttpServletRequest request) {
 		return null;
 
 	}
@@ -52,14 +52,14 @@ public class ClientWebService {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getById(@Context HttpServletRequest request, @PathParam("id") int id) {
-		return "CLIENT";
+		return "DETAILS";
 
 	}
 
 	@PUT
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClientUser update(@Context HttpServletRequest request, @PathParam("id") int id) {
+	public UserDetails update(@Context HttpServletRequest request, @PathParam("id") int id) {
 		HttpSession session = request.getSession();
 		session.setAttribute("Client", "TESTE");
 		return null;
@@ -70,17 +70,17 @@ public class ClientWebService {
 	public String remove(@Context HttpServletRequest request, @PathParam("id") int id) {
 		HttpSession session = request.getSession();
 		session.setAttribute("Client", "TESTE");
-		return "CLIENT";
+		return "DETAILS";
 
 	}
 
-	static class ClientWebService_JerseyClient {
+	static class DetailsWebService_JerseyClient {
 
 		private WebTarget webTarget;
 		private Client client;
 		private static final String BASE_URI = "http://localhost:8080/TrueTravel/";
 
-		public ClientWebService_JerseyClient() {
+		public DetailsWebService_JerseyClient() {
 			client = javax.ws.rs.client.ClientBuilder.newClient();
 			webTarget = client.target(BASE_URI).path("order");
 		}

@@ -6,14 +6,12 @@
 package model.webservice;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -23,27 +21,28 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import model.entities.ClientUser;
+import model.entities.UserSuper;
+
 /**
  * REST Web Service
  *
  * @author deecarneiro
  */
-@Path("client")
-public class ClientWebService {
+@Path("user")
+public class UserWebService {
 
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClientUser create(@Context HttpServletRequest request, ClientUser user) {
+	public UserSuper create(@Context HttpServletRequest request, UserSuper order) {
 		HttpSession session = request.getSession();
-		session.setAttribute("Client", "TESTE");
+		session.setAttribute("User", "TESTE");
 		return null;
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClientUser list(@Context HttpServletRequest request) {
+	public UserSuper list(@Context HttpServletRequest request) {
 		return null;
 
 	}
@@ -52,16 +51,16 @@ public class ClientWebService {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getById(@Context HttpServletRequest request, @PathParam("id") int id) {
-		return "CLIENT";
+		return "USER";
 
 	}
 
 	@PUT
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClientUser update(@Context HttpServletRequest request, @PathParam("id") int id) {
+	public UserSuper update(@Context HttpServletRequest request, @PathParam("id") int id) {
 		HttpSession session = request.getSession();
-		session.setAttribute("Client", "TESTE");
+		session.setAttribute("User", "TESTE");
 		return null;
 	}
 
@@ -69,18 +68,18 @@ public class ClientWebService {
 	@Path("{id}")
 	public String remove(@Context HttpServletRequest request, @PathParam("id") int id) {
 		HttpSession session = request.getSession();
-		session.setAttribute("Client", "TESTE");
-		return "CLIENT";
+		session.setAttribute("User", "TESTE");
+		return "USER";
 
 	}
 
-	static class ClientWebService_JerseyClient {
+	static class UserWebService_JerseyClient {
 
 		private WebTarget webTarget;
 		private Client client;
 		private static final String BASE_URI = "http://localhost:8080/TrueTravel/";
 
-		public ClientWebService_JerseyClient() {
+		public UserWebService_JerseyClient() {
 			client = javax.ws.rs.client.ClientBuilder.newClient();
 			webTarget = client.target(BASE_URI).path("order");
 		}
@@ -116,5 +115,6 @@ public class ClientWebService {
 			client.close();
 		}
 	}
+
 
 }

@@ -4,11 +4,15 @@
 /home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/entities/Manager.java
 /home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/beans/ProjectBean.java
 /home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/beans/OrderBean.java
+/home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/webservice/ProjectWebService.java
 /home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/service/ClientService.java
 /home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/service/ManagerService.java
+/home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/webservice/UserDetailsWebService.java
 /home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/service/ProjectService.java
 /home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/service/Servico.java
 /home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/beans/UserBean.java
+/home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/webservice/OrderMessageWebService.java
+/home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/webservice/UserWebService.java
 /home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/webservice/ApplicationConfig.java
 /home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/entities/Project.java
 /home/deecarneiro/Área de Trabalho/IFPE/PROJETO DE DESENVOLVIMENTO DE SOFTWARE COORPORATIVO/TrueTravel-Backend/src/main/java/model/entities/Entidade.java

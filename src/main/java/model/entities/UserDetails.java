@@ -9,8 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
@@ -66,6 +68,10 @@ public class UserDetails  extends Entidade implements Serializable {
 	@NotBlank
 	@Column(name="permission")
 	protected int permission;
+	
+	@OneToOne
+	@JoinColumn(name="userId")
+	protected UserSuper user;
 
   
 	public UserDetails() {
@@ -126,24 +132,37 @@ public class UserDetails  extends Entidade implements Serializable {
 		return serialVersionUID;
 	}
 
+
+	public UserSuper getUser() {
+		return user;
+	}
+
+
+	public void setUser(UserSuper user) {
+		this.user = user;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((passport == null) ? 0 : passport.hashCode());
 		result = prime * result + permission;
 		result = prime * result + ((photo == null) ? 0 : photo.hashCode());
 		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -175,14 +194,22 @@ public class UserDetails  extends Entidade implements Serializable {
 				return false;
 		} else if (!rg.equals(other.rg))
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		return true;
 	}
+
 
 	@Override
 	public String toString() {
 		return "UserDetails [id=" + id + ", photo=" + photo + ", passport=" + passport + ", rg=" + rg + ", cpf=" + cpf
-				+ ", permission=" + permission + "]";
+				+ ", permission=" + permission + ", user=" + user + "]";
 	}
+
+	
 	
 	
 	

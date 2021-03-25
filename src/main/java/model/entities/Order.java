@@ -47,7 +47,7 @@ public class Order extends Entidade implements Serializable {
 	protected Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "UserSuperId")
+	@JoinColumn(name = "userId")
 	protected model.entities.UserSuper UserSuper;
 
 	@NotBlank
@@ -78,11 +78,10 @@ public class Order extends Entidade implements Serializable {
 
 	@Column(name = "status")
 	protected int status;
-
-	@OneToMany
-	@JoinColumn(name = "orderId")
-	protected List<OrderMessage> messages;
-
+	
+	@JoinColumn(name="projectId")
+	protected Project project;
+	
 	public Long getId() {
 		return id;
 	}
@@ -155,12 +154,12 @@ public class Order extends Entidade implements Serializable {
 		this.status = status;
 	}
 
-	public List<OrderMessage> getMessages() {
-		return messages;
+	public Project getProject() {
+		return project;
 	}
 
-	public void setMessages(List<OrderMessage> messages) {
-		this.messages = messages;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	@Override
@@ -176,8 +175,8 @@ public class Order extends Entidade implements Serializable {
 		result = prime * result + ((departureDate == null) ? 0 : departureDate.hashCode());
 		result = prime * result + ((destination == null) ? 0 : destination.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((messages == null) ? 0 : messages.hashCode());
 		result = prime * result + ((origin == null) ? 0 : origin.hashCode());
+		result = prime * result + ((project == null) ? 0 : project.hashCode());
 		result = prime * result + status;
 		return result;
 	}
@@ -223,15 +222,15 @@ public class Order extends Entidade implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (messages == null) {
-			if (other.messages != null)
-				return false;
-		} else if (!messages.equals(other.messages))
-			return false;
 		if (origin == null) {
 			if (other.origin != null)
 				return false;
 		} else if (!origin.equals(other.origin))
+			return false;
+		if (project == null) {
+			if (other.project != null)
+				return false;
+		} else if (!project.equals(other.project))
 			return false;
 		if (status != other.status)
 			return false;
@@ -242,7 +241,8 @@ public class Order extends Entidade implements Serializable {
 	public String toString() {
 		return "Order [id=" + id + ", UserSuper=" + UserSuper + ", destination=" + destination + ", origin=" + origin
 				+ ", departureDate=" + departureDate + ", arrivalDate=" + arrivalDate + ", agencyName=" + agencyName
-				+ ", cost=" + cost + ", status=" + status + ", messages=" + messages + "]";
+				+ ", cost=" + cost + ", status=" + status + ", project=" + project + "]";
 	}
+
 
 }

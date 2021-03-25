@@ -48,4 +48,10 @@ public class OrderService extends Servico<Order> {
     public List<Order> consultarEntidades() {
        return consultarEntidades( new Object[] {}, Order.ALL_ORDERS);
     }
+    
+    @TransactionAttribute(SUPPORTS)
+    public Order consultar(int id) {
+        return consultarEntidade( new Object[] {id}, Order.ORDER_BY_ID);
+
+    }
 }

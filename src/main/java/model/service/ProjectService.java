@@ -20,7 +20,6 @@ import model.entities.Project;
  * @author deecarneiro
  */
 @LocalBean
-@ValidateOnExecution(type = ExecutableType.ALL)
 public class ProjectService extends Servico<Project> {
 
     @Override

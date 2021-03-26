@@ -31,7 +31,7 @@ import model.entities.Entidade;
 @TransactionAttribute(REQUIRED)
 public abstract class Servico<T extends Entidade> {
 
-    @PersistenceContext(name = "ductum", type = TRANSACTION)
+    @PersistenceContext(name = "trueTravel", type = TRANSACTION)
     protected EntityManager entityManager;
     protected Class<T> classe;
 
@@ -48,6 +48,7 @@ public abstract class Servico<T extends Entidade> {
         return true;
     }
 
+    @TransactionAttribute(SUPPORTS)
     public void persistir(@Valid T entidade) {
         if (!existe(entidade)) {
             entityManager.persist(entidade);
@@ -63,7 +64,6 @@ public abstract class Servico<T extends Entidade> {
         return entidade;
     }
 
-    @TransactionAttribute(SUPPORTS)
     public T consultarPorId(@NotNull Long id) {
         return entityManager.find(classe, id);
     }

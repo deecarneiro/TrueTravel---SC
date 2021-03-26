@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,13 +37,24 @@ import org.hibernate.validator.constraints.NotBlank;
 @DiscriminatorColumn(name = "disc_user", //Nome da coluna que vai discriminar subclasses.
         discriminatorType = DiscriminatorType.STRING, length = 1)
 @Access(AccessType.FIELD)
+
+@NamedQueries(
+		{ 
+		@NamedQuery(name = UserSuper.ALL_USERS, query = "SELECT us FROM UserSuper us"),
+		@NamedQuery(name = UserSuper.USER_BY_ID, query = "SELECT us FROM UserSuper us WHERE us.id = ?1"),
+		@NamedQuery(name = UserSuper.LOGIN, query = "SELECT us FROM UserSuper us WHERE us.username = ?1 AND us.password = ?2 "), }
+
+)
 public abstract class UserSuper extends Entidade implements Serializable {
     
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	public static final String ALL_USERS = "All_Users";
+	public static final String USER_BY_ID = "User_By_Id";
+	public static final String LOGIN = "User_Login";
+	
 	@Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.AUTO)

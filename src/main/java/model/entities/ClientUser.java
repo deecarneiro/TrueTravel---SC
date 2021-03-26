@@ -1,7 +1,5 @@
 package model.entities;
 
-
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -23,7 +21,9 @@ import org.hibernate.validator.constraints.br.CNPJ;
 @Table(name = "TB_CLIENT")
 @DiscriminatorValue(value = "C")
 @PrimaryKeyJoinColumn(name = "ID_USER", referencedColumnName = "ID")
-@NamedQueries({ @NamedQuery(name = ClientUser.ALL_CLIENTS, query = "SELECT c FROM ClientUser c"),
+@NamedQueries(
+		{ 
+		@NamedQuery(name = ClientUser.ALL_CLIENTS, query = "SELECT c FROM ClientUser c"),
 		@NamedQuery(name = ClientUser.PASS_AND_LOGIN, query = "SELECT c FROM ClientUser c WHERE c.username = ?1 AND c.password = ?2 "), }
 
 )

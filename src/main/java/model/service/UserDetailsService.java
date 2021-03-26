@@ -21,7 +21,6 @@ import model.entities.UserDetails;
  */
 
 @LocalBean
-@ValidateOnExecution(type = ExecutableType.ALL)
 public class UserDetailsService extends Servico<UserDetails> {
 
     @Override

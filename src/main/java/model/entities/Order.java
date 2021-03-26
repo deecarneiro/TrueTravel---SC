@@ -33,7 +33,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @NamedQueries({ @NamedQuery(name = Order.ALL_ORDERS, query = "SELECT o FROM Order o"),
 		@NamedQuery(name = Order.ORDER_BY_ID, query = "SELECT o FROM Order o WHERE o.id = ?1") })
 public class Order extends Entidade implements Serializable {
-
 	/**
 	 * 
 	 */
@@ -59,12 +58,12 @@ public class Order extends Entidade implements Serializable {
 	protected String origin;
 
 	@NotBlank
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "departureDate")
 	protected Date departureDate;
 
 	@NotBlank
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "arrivalDate")
 	protected Date arrivalDate;
 

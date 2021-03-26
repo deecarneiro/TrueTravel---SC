@@ -20,7 +20,6 @@ import model.entities.Manager;
  * @author deecarneiro
  */
 @LocalBean
-@ValidateOnExecution(type = ExecutableType.ALL)
 public class ManagerService extends Servico<Manager> {
 
     @Override

@@ -18,7 +18,6 @@ import model.entities.OrderMessage;
  */
 
 @LocalBean
-@ValidateOnExecution(type = ExecutableType.ALL)
 public class OrderMessageService extends Servico<OrderMessage> {
 
     @Override

@@ -14,24 +14,48 @@ import javax.validation.executable.ExecutableType;
 import javax.validation.executable.ValidateOnExecution;
 
 import model.entities.ClientUser;
+import model.entities.Order;
+import model.entities.UserSuper;
 
 /**
  *
  * @author deecarneiro
  */
 @LocalBean
-@ValidateOnExecution(type = ExecutableType.ALL)
 public class ClientService extends Servico<ClientUser> {
+	
+    @Override
+    public ClientUser criar() {
+        return new ClientUser();
+    }
+    
+     @Override
+    public void persistir(ClientUser entidade) {
+        entityManager.persist(entidade);//To change body of generated methods, choose Tools | Templates.
+    }
 
+    @Override
+    public ClientUser atualizar(ClientUser entidade) {
+        entityManager.merge(entidade);
+        entityManager.flush();
+        return entidade;
+    }
+
+    public void remover(ClientUser entidade) {
+        entidade = entityManager.merge(entidade);
+        entityManager.remove(entidade);
+
+    }
 
     @TransactionAttribute(SUPPORTS)
     public List<ClientUser> consultarEntidades() {
        return consultarEntidades( new Object[] {}, ClientUser.ALL_CLIENTS);
     }
-
+    
     @TransactionAttribute(SUPPORTS)
-    public ClientUser criar() {
-        return new ClientUser();
+    public UserSuper consultar(int id) {
+        return consultarEntidade( new Object[] {id}, UserSuper.USER_BY_ID);
+
     }
 
     @TransactionAttribute(SUPPORTS)

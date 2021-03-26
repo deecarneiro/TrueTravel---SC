@@ -17,8 +17,7 @@ import model.entities.Order;
  *
  * @author deecarneiro
  */
-@LocalBean
-@ValidateOnExecution(type = ExecutableType.ALL)
+@Stateless
 public class OrderService extends Servico<Order> {
 
     @Override
@@ -50,7 +49,7 @@ public class OrderService extends Servico<Order> {
     }
     
     @TransactionAttribute(SUPPORTS)
-    public Order consultar(int id) {
+    public Order consultar(long id) {
         return consultarEntidade( new Object[] {id}, Order.ORDER_BY_ID);
 
     }

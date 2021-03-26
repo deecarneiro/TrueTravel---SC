@@ -1,23 +1,20 @@
 package model.beans;
 
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
+
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+
 import model.entities.Order;
-import model.service.*;
+import model.service.OrderService;
 /**
  *
  * @author MASC
  */
-@Named(value="OrderBean")
-@ApplicationScoped
+@Stateless
 public class OrderBean{
     
 
@@ -30,15 +27,30 @@ public class OrderBean{
       serviceOrder.criar();
     }
 
-    public boolean salvar(Order entidade) {
-    entidade.setId(Long.MIN_VALUE);
+    public Order salvar(Order entidade) {
+//    entidade.setId(Long.MIN_VALUE);
         serviceOrder.persistir(entidade);
-        return true;
+        return entidade;
+    }
+    
+    public Order atualizar(Order order, int id) {
+    	Order orderById = serviceOrder.consultar(id);
+    	return serviceOrder.atualizar(order);
+    }
+    
+    public void remover(int id) {
+    	Order orderById = serviceOrder.consultar(id);
+    	serviceOrder.remover(orderById);
     }
 
     public List<Order> getLista() {
         lista = serviceOrder.consultarEntidades();
         return lista;
+    }
+    
+    public Order getById(long id) {
+    	this.Order = serviceOrder.consultarPorId(id);
+    	return this.Order;
     }
 
     public void setLista(List<Order> lista) {

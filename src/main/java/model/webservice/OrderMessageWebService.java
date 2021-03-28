@@ -6,9 +6,13 @@
 package model.webservice;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
@@ -21,6 +25,12 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import model.beans.OrderMessageBean;
+import model.entities.Order;
 import model.entities.OrderMessage;
 
 /**
@@ -31,46 +41,67 @@ import model.entities.OrderMessage;
 @Path("message")
 public class OrderMessageWebService {
 
-
+	@EJB
+	private OrderMessageBean orderMessageBean;
+	
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public OrderMessage create(@Context HttpServletRequest request, OrderMessage message) {
+	public OrderMessage create(@Context HttpServletRequest request, String is) throws JsonMappingException, JsonProcessingException {
 		HttpSession session = request.getSession();
-		session.setAttribute("OrderMessage", "TESTE");
-		return null;
+		ObjectMapper mapper = new ObjectMapper();
+		OrderMessage orderMessage = mapper.readValue(is, OrderMessage.class);
+		orderMessageBean.salvar(orderMessage);
+		session.setAttribute("OrderMessage", orderMessage);
+		return orderMessage;
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public OrderMessage list(@Context HttpServletRequest request) {
-		return null;
-
+	public List<OrderMessage> list(@Context HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		List<OrderMessage> orderMessages = orderMessageBean.getLista();
+		session.setAttribute("Order", orderMessages);
+		return orderMessages;
 	}
 
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getById(@Context HttpServletRequest request, @PathParam("id") int id) {
-		return "MESSAGE";
-
+	public OrderMessage getById(@Context HttpServletRequest request, @PathParam("id") int id) {
+		HttpSession session = request.getSession();
+		OrderMessage orderMessage = orderMessageBean.getById(id);
+		session.setAttribute("Order", orderMessage);
+		return orderMessage;
+	}
+	
+	@GET
+	@Path("order/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<OrderMessage> getByOrder(@Context HttpServletRequest request, @PathParam("id") int id) {
+		HttpSession session = request.getSession();
+		List<OrderMessage> orderMessage = orderMessageBean.getByOrder(id);
+		session.setAttribute("Order", orderMessage);
+		return orderMessage;
 	}
 
 	@PUT
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public OrderMessage update(@Context HttpServletRequest request, @PathParam("id") int id) {
+	public OrderMessage update(@Context HttpServletRequest request, @PathParam("id") int id,  String jsonString) throws JsonMappingException, JsonProcessingException {
 		HttpSession session = request.getSession();
-		session.setAttribute("OrderMessage", "TESTE");
-		return null;
+		ObjectMapper mapper = new ObjectMapper();
+		OrderMessage orderMessagenew = mapper.readValue(jsonString, OrderMessage.class);
+		orderMessageBean.atualizar(orderMessagenew, id);
+		session.setAttribute("Order", orderMessagenew);
+		return orderMessagenew;
 	}
 
 	@DELETE
 	@Path("{id}")
-	public String remove(@Context HttpServletRequest request, @PathParam("id") int id) {
+	public void remove(@Context HttpServletRequest request, @PathParam("id") int id) {
 		HttpSession session = request.getSession();
-		session.setAttribute("OrderMessage", "TESTE");
-		return "MESSAGE";
-
+		orderMessageBean.remover(id);;
 	}
 
 	static class OrderMessageWebService_JerseyClient {
@@ -115,6 +146,5 @@ public class OrderMessageWebService {
 			client.close();
 		}
 	}
-
 
 }

@@ -99,7 +99,7 @@ public class OrderWebService {
 	@Path("{id}")
 	public void remove(@Context HttpServletRequest request, @PathParam("id") int id) {
 		HttpSession session = request.getSession();
-		orderBean.remover(id);;
+		orderBean.remover(id);
 	}
 
 	static class OrderWebService_JerseyClient {

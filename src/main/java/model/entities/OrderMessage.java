@@ -4,9 +4,11 @@ package model.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +19,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 
 /**
@@ -38,7 +42,7 @@ import javax.persistence.Table;
             ),
              @NamedQuery(
             		 name = OrderMessage.ALL_MESSAGE_BY_ORDER,
-            		 query = "SELECT m FROM OrderMessage m WHERE m.order = ?1")
+            		 query = "SELECT m FROM OrderMessage m WHERE m.orderId = ?1")
         }
 )
 public class OrderMessage extends Entidade implements Serializable {
@@ -56,57 +60,49 @@ public class OrderMessage extends Entidade implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
     
+    @NotBlank
     @Column(name="message")
     protected String message;
     
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
     @JoinColumn(name = "userId")
-    protected UserSuper user;
+    protected UserSuper userId;
 
-	@ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "orderId")
-	protected Order order;
-
+	protected Order orderId;
 
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
-	public UserSuper getUser() {
-		return user;
-	}
-
-
-	public void setUser(UserSuper user) {
-		this.user = user;
-	}
-
 
 	public String getMessage() {
 		return message;
 	}
 
-
 	public void setMessage(String message) {
 		this.message = message;
 	}
 
-
-	public Order getOrder() {
-		return order;
+	public UserSuper getUserId() {
+		return userId;
 	}
 
-
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setUserId(UserSuper userId) {
+		this.userId = userId;
 	}
 
+	public Order getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Order orderId) {
+		this.orderId = orderId;
+	}
 
 	@Override
 	public int hashCode() {
@@ -114,11 +110,10 @@ public class OrderMessage extends Entidade implements Serializable {
 		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
-		result = prime * result + ((order == null) ? 0 : order.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -139,23 +134,22 @@ public class OrderMessage extends Entidade implements Serializable {
 				return false;
 		} else if (!message.equals(other.message))
 			return false;
-		if (order == null) {
-			if (other.order != null)
+		if (orderId == null) {
+			if (other.orderId != null)
 				return false;
-		} else if (!order.equals(other.order))
+		} else if (!orderId.equals(other.orderId))
 			return false;
-		if (user == null) {
-			if (other.user != null)
+		if (userId == null) {
+			if (other.userId != null)
 				return false;
-		} else if (!user.equals(other.user))
+		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
-		return "OrderMessage [id=" + id + ", message=" + message + ", user=" + user + ", order=" + order + "]";
+		return "OrderMessage [id=" + id + ", message=" + message + ", userId=" + userId + ", orderId=" + orderId + "]";
 	}
 
 

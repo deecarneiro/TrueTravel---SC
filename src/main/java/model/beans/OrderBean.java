@@ -49,8 +49,8 @@ public class OrderBean{
     }
     
     public Order getById(long id) {
-    	this.Order = serviceOrder.consultarPorId(id);
-    	return this.Order;
+    	Order = serviceOrder.consultar(id);
+    	return Order;
     }
 
     public void setLista(List<Order> lista) {

@@ -20,6 +20,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -56,13 +57,12 @@ public class Order extends Entidade implements Serializable {
 	@NotBlank
 	@Column(name = "origin")
 	protected String origin;
-
-	@NotBlank
+	
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "departureDate")
 	protected Date departureDate;
 
-	@NotBlank
 	@Temporal(TemporalType.DATE)
 	@Column(name = "arrivalDate")
 	protected Date arrivalDate;
@@ -71,7 +71,7 @@ public class Order extends Entidade implements Serializable {
 	@Column(name = "agencyName")
 	protected String agencyName;
 
-	@NotBlank
+	@NotNull
 	@Column(name = "cost")
 	protected double cost;
 

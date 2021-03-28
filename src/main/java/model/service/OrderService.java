@@ -40,7 +40,7 @@ public class OrderService extends Servico<Order> {
     public void remover(Order entidade) {
         entidade = entityManager.merge(entidade);
         entityManager.remove(entidade);
-
+        
     }
 
     @TransactionAttribute(SUPPORTS)

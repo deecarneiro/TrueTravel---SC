@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+<!--    <SEEDING CLIENT TABLE>-->
+
+ <TB_USER id="1" disc_user="C" created="2019-08-01" email="admin@email.com" username="admin1" name="Deyse Carneiro" password="Admin123*" status="1"/>
+    <TB_CLIENT id_user="1" cnpj="69.871.051/0001-95" />
+
+</dataset>

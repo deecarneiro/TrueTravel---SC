@@ -5,6 +5,7 @@
  */
 package model.webservice;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -51,7 +52,7 @@ public class UserWebService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public UserSuper create(@Context HttpServletRequest request, String is)
-			throws JsonMappingException, JsonProcessingException {
+			throws JsonMappingException, JsonProcessingException, NoSuchAlgorithmException {
 		HttpSession session = request.getSession();
 		ObjectMapper mapper = new ObjectMapper();
 		UserSuper user = mapper.readValue(is, UserSuper.class);
@@ -66,7 +67,7 @@ public class UserWebService {
 	@Path("login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public UserSuper login(@Context HttpServletRequest request, String is) throws JsonMappingException, JsonProcessingException{
+	public UserSuper login(@Context HttpServletRequest request, String is) throws JsonMappingException, JsonProcessingException, NoSuchAlgorithmException{
 		HttpSession session = request.getSession();
 		UserSuper user = new UserSuper();
 		final ObjectNode node = new ObjectMapper().readValue(is, ObjectNode.class);

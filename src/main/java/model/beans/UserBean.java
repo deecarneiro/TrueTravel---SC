@@ -8,9 +8,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import model.entities.UserSuper;
-import model.entities.UserSuper;
-import model.entities.UserSuper;
-import model.entities.UserSuper;
 import model.service.UserService;
 import utils.UserUtils;
 
@@ -78,8 +75,10 @@ public class UserBean{
         this.UserSuper = UserSuper;
     }
 
-	public UserSuper atualizar(UserSuper user, Long id) {
+	public UserSuper atualizar(UserSuper user, Long id) throws NoSuchAlgorithmException {
 		UserSuper userById = serviceUser.consultar(id);
+    	String senhaCripto = UserUtils.md5(user.getPassword());
+    	user.setPassword(senhaCripto);
     	return serviceUser.atualizar(user);	
 	}
     

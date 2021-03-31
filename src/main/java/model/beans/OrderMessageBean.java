@@ -57,6 +57,11 @@ public class OrderMessageBean{
     	return orderMessages;
     }
     
+    public List<OrderMessage> getByUser(long id) {
+    	List<OrderMessage> orderMessages = serviceOrderMessage.consultarPorUser(id);
+    	return orderMessages;
+    }
+    
     public void setLista(List<OrderMessage> lista) {
         this.lista = lista;
     }

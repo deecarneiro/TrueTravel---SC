@@ -7,18 +7,22 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +31,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -104,27 +110,13 @@ public class UserSuper extends Entidade implements Serializable {
     @Column(name="status")
     protected int status;
     
-   
+    @JoinColumn(name = "detailsId", insertable = true, updatable = true)
+    @OneToOne(targetEntity = UserDetails.class, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private UserDetails details;
+    
+    
 	public UserSuper() {
 		super();
-	}
-
-
-	public UserSuper(Long id, String username, String name, String email, String password, String phoneNumber,
-			Long externalId, Date created, Date lastLogin, String token, String type, int status) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.phoneNumber = phoneNumber;
-		this.externalId = externalId;
-		this.created = created;
-		this.lastLogin = lastLogin;
-		this.token = token;
-		this.type = type;
-		this.status = status;
 	}
 
 
@@ -248,11 +240,22 @@ public class UserSuper extends Entidade implements Serializable {
 	}
 
 
+	public UserDetails getDetails() {
+		return details;
+	}
+
+
+	public void setDetails(UserDetails details) {
+		this.details = details;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((created == null) ? 0 : created.hashCode());
+		result = prime * result + ((details == null) ? 0 : details.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((externalId == null) ? 0 : externalId.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -281,6 +284,11 @@ public class UserSuper extends Entidade implements Serializable {
 			if (other.created != null)
 				return false;
 		} else if (!created.equals(other.created))
+			return false;
+		if (details == null) {
+			if (other.details != null)
+				return false;
+		} else if (!details.equals(other.details))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -342,8 +350,10 @@ public class UserSuper extends Entidade implements Serializable {
 	public String toString() {
 		return "UserSuper [id=" + id + ", username=" + username + ", name=" + name + ", email=" + email + ", password="
 				+ password + ", phoneNumber=" + phoneNumber + ", externalId=" + externalId + ", created=" + created
-				+ ", lastLogin=" + lastLogin + ", token=" + token + ", type=" + type + ", status=" + status + "]";
+				+ ", lastLogin=" + lastLogin + ", token=" + token + ", type=" + type + ", status=" + status
+				+ ", details=" + details + "]";
 	}
-	
+
+
     
 }

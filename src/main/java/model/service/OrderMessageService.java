@@ -52,6 +52,11 @@ public class OrderMessageService extends Servico<OrderMessage> {
 	}
 
 	@TransactionAttribute(SUPPORTS)
+	public List<OrderMessage> consultarPorUser(long id) {
+		return consultarEntidades(new Object[] { id }, OrderMessage.ALL_MESSAGE_BY_USER);
+
+	}
+	@TransactionAttribute(SUPPORTS)
 	public OrderMessage consultarId(long id) {
 		return consultarEntidade(new Object[] { id }, OrderMessage.ORDER_MESSAGE_BY_ID);
 

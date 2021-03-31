@@ -46,7 +46,10 @@ import model.entities.*;
             ),
              @NamedQuery(
             		 name = OrderMessage.ALL_MESSAGE_BY_ORDER,
-            		 query = "SELECT m FROM OrderMessage m WHERE m.orderId = ?1")
+            		 query = "SELECT m FROM OrderMessage m WHERE m.orderId = ?1"),
+             @NamedQuery(
+            		 name = OrderMessage.ALL_MESSAGE_BY_USER,
+            		 query = "SELECT m FROM OrderMessage m WHERE m.userId = ?1")
         }
 )
 public class OrderMessage extends Entidade implements Serializable {
@@ -58,7 +61,9 @@ public class OrderMessage extends Entidade implements Serializable {
 	public static final String ALL_MESSAGE_ORDER = "All_Message_OrderMessages";
     public static final String ORDER_MESSAGE_BY_ID= "OrderMessage_Message_By_Id";
     public static final String ALL_MESSAGE_BY_ORDER = "All_Messages_By_Order_Id";
+    public static final String ALL_MESSAGE_BY_USER = "All_Messages_By_User_Id";
 
+    
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.AUTO)

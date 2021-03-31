@@ -56,35 +56,86 @@ public class UserDetails  extends Entidade implements Serializable {
 	@Column(name="photo")
 	protected String photo;
 	
-	@NotBlank
+	
 	@Column(name="passport")
 	protected String passport;
 	
-	@NotBlank
 	@Column(name="rg")
 	protected String rg;
 	
-	@NotBlank
 	@CPF
 	@Column(name="cpf")
 	protected String cpf;
 	
-	@NotBlank
 	@Column(name="permission")
 	protected int permission;
 	
-	@JoinColumn(name = "userId", insertable = false, updatable = false)
-    @OneToOne(targetEntity = UserSuper.class, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private UserSuper user;
-
-    @Column(name = "userId", insertable = true, updatable = true)
-    private Long userId;
-
+	
 	public UserDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+
+	public String getPassport() {
+		return passport;
+	}
+
+
+	public void setPassport(String passport) {
+		this.passport = passport;
+	}
+
+
+	public String getRg() {
+		return rg;
+	}
+
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+
+	public String getCpf() {
+		return cpf;
+	}
+
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+
+	public int getPermission() {
+		return permission;
+	}
+
+
+	public void setPermission(int permission) {
+		this.permission = permission;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -96,10 +147,9 @@ public class UserDetails  extends Entidade implements Serializable {
 		result = prime * result + permission;
 		result = prime * result + ((photo == null) ? 0 : photo.hashCode());
 		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -137,24 +187,16 @@ public class UserDetails  extends Entidade implements Serializable {
 				return false;
 		} else if (!rg.equals(other.rg))
 			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
-			return false;
 		return true;
 	}
+
 
 	@Override
 	public String toString() {
 		return "UserDetails [id=" + id + ", photo=" + photo + ", passport=" + passport + ", rg=" + rg + ", cpf=" + cpf
-				+ ", permission=" + permission + ", user=" + user + ", userId=" + userId + "]";
+				+ ", permission=" + permission + "]";
 	}
+
 
   
 

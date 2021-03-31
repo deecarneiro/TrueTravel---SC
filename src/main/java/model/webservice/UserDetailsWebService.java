@@ -5,84 +5,105 @@
  */
 package model.webservice;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import model.beans.UserDetailsBean;
 import model.entities.UserDetails;
 /**
  * REST Web Service
  *
  * @author deecarneiro
  */
-@Path("userdetails")
+@Path("user/details")
 public class UserDetailsWebService {
 
-
+	@EJB
+	private UserDetailsBean UserDetailsBean;
+		
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public UserDetails create(@Context HttpServletRequest request, UserDetails user) {
+	public UserDetails create(@Context HttpServletRequest request, String is)
+			throws JsonMappingException, JsonProcessingException {
 		HttpSession session = request.getSession();
-		session.setAttribute("Client", "TESTE");
-		return null;
+		ObjectMapper mapper = new ObjectMapper();
+		UserDetails details = mapper.readValue(is, UserDetails.class);
+		UserDetailsBean.salvar(details);
+		session.setAttribute("UserDetails", details);
+		return details;
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public UserDetails list(@Context HttpServletRequest request) {
-		return null;
+	public List<UserDetails> list(@Context HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		List<UserDetails> detailss = UserDetailsBean.getLista();
+		session.setAttribute("UserDetails", detailss);
+		return detailss;
 
 	}
 
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getById(@Context HttpServletRequest request, @PathParam("id") int id) {
-		return "DETAILS";
-
+	public UserDetails getById(@Context HttpServletRequest request, @PathParam("id") long id) {
+		HttpSession session = request.getSession();
+		UserDetails details = UserDetailsBean.getById(id);
+		session.setAttribute("UserDetails", details);
+		return details;
 	}
 
 	@PUT
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public UserDetails update(@Context HttpServletRequest request, @PathParam("id") int id) {
+	public UserDetails update(@Context HttpServletRequest request, @PathParam("id") int id, String jsonString) throws JsonMappingException, JsonProcessingException {
 		HttpSession session = request.getSession();
-		session.setAttribute("Client", "TESTE");
-		return null;
+		ObjectMapper mapper = new ObjectMapper();
+		UserDetails detailsnew = mapper.readValue(jsonString, UserDetails.class);
+		UserDetailsBean.atualizar(detailsnew, id);
+		session.setAttribute("UserDetails", detailsnew);
+		return detailsnew;
 	}
 
 	@DELETE
 	@Path("{id}")
-	public String remove(@Context HttpServletRequest request, @PathParam("id") int id) {
+	public void remove(@Context HttpServletRequest request, @PathParam("id") int id) {
 		HttpSession session = request.getSession();
-		session.setAttribute("Client", "TESTE");
-		return "DETAILS";
-
+		UserDetailsBean.remover(id);
 	}
 
-	static class DetailsWebService_JerseyClient {
+	static class UserDetailsWebService_JerseyClient {
 
 		private WebTarget webTarget;
 		private Client client;
 		private static final String BASE_URI = "http://localhost:8080/TrueTravel/";
 
-		public DetailsWebService_JerseyClient() {
+		public UserDetailsWebService_JerseyClient() {
 			client = javax.ws.rs.client.ClientBuilder.newClient();
-			webTarget = client.target(BASE_URI).path("order");
+			webTarget = client.target(BASE_URI).path("user/details");
 		}
 
 		public <T> T create(Object requestEntity, Class<T> responseType) throws ClientErrorException {
@@ -116,5 +137,6 @@ public class UserDetailsWebService {
 			client.close();
 		}
 	}
+
 
 }

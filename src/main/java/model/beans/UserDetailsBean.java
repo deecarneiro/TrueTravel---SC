@@ -32,10 +32,10 @@ public class UserDetailsBean{
       serviceUserDetails.criar();
     }
 
-    public boolean salvar(UserDetails entidade) {
+    public UserDetails salvar(UserDetails entidade) {
 //    entidade.setId(Long.MIN_VALUE);
         serviceUserDetails.persistir(entidade);
-        return true;
+        return entidade;
     }
 
     public UserDetails atualizar(UserDetails entidade, int id) {
@@ -53,6 +53,11 @@ public class UserDetailsBean{
         return lista;
     }
 
+    public UserDetails getById(long id) {
+    	UserDetails = serviceUserDetails.consultar(id);
+    	return UserDetails;
+    }
+    
     public void setLista(List<UserDetails> lista) {
         this.lista = lista;
     }

@@ -54,7 +54,7 @@ public abstract class Servico<T extends Entidade> {
             entityManager.persist(entidade);
         }
     }
-
+    @TransactionAttribute(SUPPORTS)
     public T atualizar(@Valid T entidade) {
         if (existe(entidade)) {
             entidade = entityManager.merge(entidade);

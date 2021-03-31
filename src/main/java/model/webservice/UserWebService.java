@@ -34,6 +34,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import model.beans.UserBean;
+import model.entities.UserDetails;
 import model.entities.UserSuper;
 /**
  * REST Web Service
@@ -45,7 +46,7 @@ public class UserWebService {
 
 	@EJB
 	private UserBean UserBean;
-	
+		
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

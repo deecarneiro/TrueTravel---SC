@@ -82,6 +82,16 @@ public class OrderMessageWebService {
 		session.setAttribute("Order", orderMessage);
 		return orderMessage;
 	}
+	
+	@GET
+	@Path("user/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<OrderMessage> getByUser(@Context HttpServletRequest request, @PathParam("id") int id) {
+		HttpSession session = request.getSession();
+		List<OrderMessage> orderMessage = orderMessageBean.getByUser(id);
+		session.setAttribute("Order", orderMessage);
+		return orderMessage;
+	}
 
 	@PUT
 	@Path("{id}")

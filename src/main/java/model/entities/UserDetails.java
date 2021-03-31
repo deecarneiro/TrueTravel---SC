@@ -6,15 +6,21 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -50,24 +56,21 @@ public class UserDetails  extends Entidade implements Serializable {
 	@Column(name="photo")
 	protected String photo;
 	
-	@NotBlank
+	
 	@Column(name="passport")
 	protected String passport;
 	
-	@NotBlank
 	@Column(name="rg")
 	protected String rg;
 	
-	@NotBlank
 	@CPF
 	@Column(name="cpf")
 	protected String cpf;
 	
-	@NotBlank
 	@Column(name="permission")
 	protected int permission;
-
-  
+	
+	
 	public UserDetails() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -78,58 +81,66 @@ public class UserDetails  extends Entidade implements Serializable {
 		return id;
 	}
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	public String getPhoto() {
 		return photo;
 	}
 
+
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+
 
 	public String getPassport() {
 		return passport;
 	}
 
+
 	public void setPassport(String passport) {
 		this.passport = passport;
 	}
+
 
 	public String getRg() {
 		return rg;
 	}
 
+
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
+
 
 	public String getCpf() {
 		return cpf;
 	}
 
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 
 	public int getPermission() {
 		return permission;
 	}
 
+
 	public void setPermission(int permission) {
 		this.permission = permission;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((passport == null) ? 0 : passport.hashCode());
@@ -139,11 +150,12 @@ public class UserDetails  extends Entidade implements Serializable {
 		return result;
 	}
 
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -178,12 +190,14 @@ public class UserDetails  extends Entidade implements Serializable {
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
 		return "UserDetails [id=" + id + ", photo=" + photo + ", passport=" + passport + ", rg=" + rg + ", cpf=" + cpf
 				+ ", permission=" + permission + "]";
 	}
-	
-	
-	
+
+
+  
+
 }

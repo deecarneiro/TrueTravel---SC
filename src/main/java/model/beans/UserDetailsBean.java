@@ -1,11 +1,14 @@
 package model.beans;
 
 import model.entities.UserDetails;
+import model.entities.UserSuper;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -16,8 +19,7 @@ import model.service.UserDetailsService;
  *
  * @author MASC
  */
-@Named(value="UserDetailsBean")
-@ApplicationScoped
+@Stateless
 public class UserDetailsBean{
     
 
@@ -30,17 +32,32 @@ public class UserDetailsBean{
       serviceUserDetails.criar();
     }
 
-    public boolean salvar(UserDetails entidade) {
-    entidade.setId(Long.MIN_VALUE);
+    public UserDetails salvar(UserDetails entidade) {
+//    entidade.setId(Long.MIN_VALUE);
         serviceUserDetails.persistir(entidade);
-        return true;
+        return entidade;
     }
 
+    public UserDetails atualizar(UserDetails entidade, int id) {
+    	UserDetails userById = serviceUserDetails.consultar(id);
+    	return serviceUserDetails.atualizar(entidade);
+    }
+    
+    public void remover(int id) {
+    	UserDetails userById = serviceUserDetails.consultar(id);
+    	serviceUserDetails.remover(userById);
+    }
+   
     public List<UserDetails> getLista() {
         lista = serviceUserDetails.consultarEntidades();
         return lista;
     }
 
+    public UserDetails getById(long id) {
+    	UserDetails = serviceUserDetails.consultar(id);
+    	return UserDetails;
+    }
+    
     public void setLista(List<UserDetails> lista) {
         this.lista = lista;
     }

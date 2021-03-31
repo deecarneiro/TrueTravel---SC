@@ -1,23 +1,21 @@
 package model.beans;
 
-import model.entities.Project;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
+
 import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import javax.ejb.Stateless;
+
+import model.entities.Project;
+import model.entities.Project;
+import model.entities.Project;
 import model.service.ProjectService;
 
 /**
  *
  * @author MASC
  */
-@Named(value="ProjectBean")
-@ApplicationScoped
+@Stateless
 public class ProjectBean{
     
 
@@ -30,10 +28,20 @@ public class ProjectBean{
       serviceProject.criar();
     }
 
-    public boolean salvar(Project entidade) {
-    entidade.setId(Long.MIN_VALUE);
+    public Project salvar(Project entidade) {
+//    entidade.setId(Long.MIN_VALUE);
         serviceProject.persistir(entidade);
-        return true;
+        return entidade;
+    }
+    
+    public Project atualizar(Project order, int id) {
+    	Project orderById = serviceProject.consultar(id);
+    	return serviceProject.atualizar(order);
+    }
+    
+    public void remover(int id) {
+    	Project orderById = serviceProject.consultar(id);
+    	serviceProject.remover(orderById);
     }
 
     public List<Project> getLista() {
@@ -41,6 +49,11 @@ public class ProjectBean{
         return lista;
     }
 
+    public Project getById(long id) {
+    	Project = serviceProject.consultar(id);
+    	return Project;
+    }
+    
     public void setLista(List<Project> lista) {
         this.lista = lista;
     }

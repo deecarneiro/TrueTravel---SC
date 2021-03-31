@@ -1,102 +1,81 @@
 package model.beans;
 
-import model.entities.*;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
+
 import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import model.service.ClientService;
-import model.service.ManagerService;
+import javax.ejb.Stateless;
+
+import model.entities.UserSuper;
+import model.entities.UserSuper;
+import model.entities.UserSuper;
+import model.entities.UserSuper;
+import model.service.UserService;
 
 /**
  *
  * @author MASC
  */
-@Named
-@SessionScoped
-public class UserBean implements Serializable{
+@Stateless
+public class UserBean{
+    
 
     @EJB
-    private ClientService serviceClient;
-    private ClientUser cliente = new ClientUser();
-   
-    @EJB
-    private ManagerService serviceManager;
-    private Manager Manager= new Manager();
- 
-    public ClientUser iniciarCampos() {
-      return serviceClient.criar();
+    private UserService serviceUser;
+    private UserSuper UserSuper = new UserSuper();
+    List<UserSuper> lista = new ArrayList<UserSuper>();
+    
+    public void iniciarCampos() {
+      serviceUser.criar();
     }
 
-    public String loginClient(String login, String senha) {
-        cliente = serviceClient.consultarEntidade(senha, login);
-        if(cliente != null){
-                    System.out.println("LOGIN:"+login+" SENHA"+senha+"CLIENT"+cliente);
-
-            return "solicitacoes";
-        }
-        System.out.println("LOGIN:"+login+" SENHA"+senha+"CLIENT"+cliente);
-        return "index";
+    public UserSuper salvar(UserSuper entidade) {
+//    entidade.setId(Long.MIN_VALUE);
+        serviceUser.persistir(entidade);
+        return entidade;
     }
     
-    public String loginManager(String login, String senha) {
-        Manager = serviceManager.consultarEntidade(senha, login);
-        if(Manager != null){
-            System.out.println("LOGIN:"+login+" SENHA"+senha+"CLIENT"+Manager);
-
-            return "listarProjetos";
-        }
-        System.out.println("LOGIN:"+login+" SENHA"+senha+"CLIENT"+Manager);
-        return "listarProjetos";
-    }
- 
-    
-    public String logout(){
-              return "sair";
-    }
-
-    public ClientService getServiceClient() {
-        return serviceClient;
-    }
-
-    public void setServiceClient(ClientService serviceClient) {
-        this.serviceClient = serviceClient;
-    }
-
-    public ClientUser getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(ClientUser cliente) {
-        this.cliente = cliente;
-    }
-
-    public ManagerService getServiceManager() {
-        return serviceManager;
-    }
-
-    public void setServiceManager(ManagerService serviceManager) {
-        this.serviceManager = serviceManager;
-    }
-
-    public Manager getManager() {
-        return Manager;
-    }
-
-    public void setManager(Manager Manager) {
-        this.Manager = Manager;
+    public UserSuper atualizar(UserSuper order, int id) {
+    	UserSuper userById = serviceUser.consultar(id);
+    	return serviceUser.atualizar(order);
     }
     
+    public void remover(int id) {
+    	UserSuper userById = serviceUser.consultar(id);
+    	serviceUser.remover(userById);
+    }
+
+    public List<UserSuper> getLista() {
+        lista = serviceUser.consultarEntidades();
+        return lista;
+    }
+
+    public UserSuper getById(long id) {
+    	UserSuper = serviceUser.consultar(id);
+    	return UserSuper;
+    }
+    
+    public UserSuper login(String username, String password) {
+    	UserSuper = serviceUser.login(username, password);
+    	return UserSuper;
+    }
+    
+    public void setLista(List<UserSuper> lista) {
+        this.lista = lista;
+    }
+
+    public UserSuper getUserSuper() {
+        return UserSuper;
+    }
+
+    public void setUserSuper(UserSuper UserSuper) {
+        this.UserSuper = UserSuper;
+    }
+
+	public UserSuper atualizar(UserSuper user, Long id) {
+		UserSuper userById = serviceUser.consultar(id);
+    	return serviceUser.atualizar(user);	
+	}
+    
+
 }

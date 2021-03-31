@@ -12,6 +12,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -56,14 +57,14 @@ public class Project  extends Entidade implements Serializable {
     protected String name;
 	
     @NotBlank
-    @Column(name="descriptio")
+    @Column(name="description")
     protected String description;
 
-    @NotBlank
+    @NotNull
     @Column(name="budget")
     protected double budget;
     
-    @NotBlank
+   @NotNull
     @Column(name="status")
     protected int status;
     

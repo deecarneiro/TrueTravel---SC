@@ -13,14 +13,14 @@ import static javax.ejb.TransactionAttributeType.SUPPORTS;
 import javax.validation.executable.ExecutableType;
 import javax.validation.executable.ValidateOnExecution;
 
+import model.entities.Order;
 import model.entities.Project;
 
 /**
  *
  * @author deecarneiro
  */
-@LocalBean
-@ValidateOnExecution(type = ExecutableType.ALL)
+@Stateless
 public class ProjectService extends Servico<Project> {
 
     @Override
@@ -50,4 +50,10 @@ public class ProjectService extends Servico<Project> {
     public List<Project> consultarEntidades() {
        return consultarEntidades( new Object[] {}, Project.ALL_PROJECTS);
     }
+    
+    @TransactionAttribute(SUPPORTS)
+	public Project consultar(long id) {
+		return consultarEntidade(new Object[] { id }, Project.PROJECT_BY_ID);
+
+	}
 }

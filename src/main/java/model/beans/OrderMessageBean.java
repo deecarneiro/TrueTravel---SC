@@ -1,23 +1,19 @@
 package model.beans;
 
-import model.entities.OrderMessage;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
+
 import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import javax.ejb.Stateless;
+
+import model.entities.OrderMessage;
 import model.service.OrderMessageService;
 
 /**
  *
  * @author MASC
  */
-@Named(value="OrderMessageBean")
-@ApplicationScoped
+@Stateless
 public class OrderMessageBean{
     
 
@@ -30,17 +26,42 @@ public class OrderMessageBean{
       serviceOrderMessage.criar();
     }
 
-    public boolean salvar(OrderMessage entidade) {
-    entidade.setId(Long.MIN_VALUE);
+    public OrderMessage salvar(OrderMessage entidade) {
+//    entidade.setId(Long.MIN_VALUE);
         serviceOrderMessage.persistir(entidade);
-        return true;
+        return entidade;
+    }
+    
+    public OrderMessage atualizar(OrderMessage order, int id) {
+    	OrderMessage orderById = serviceOrderMessage.consultarId(id);
+    	return serviceOrderMessage.atualizar(order);
     }
 
+    public void remover(int id) {
+    	OrderMessage orderById = serviceOrderMessage.consultarId(id);
+    	serviceOrderMessage.remover(orderById);
+    }
+    
     public List<OrderMessage> getLista() {
         lista = serviceOrderMessage.consultarEntidades();
         return lista;
     }
 
+    public OrderMessage getById(long id) {
+    	OrderMessage = serviceOrderMessage.consultarId(id);
+    	return OrderMessage;
+    }
+    
+    public List<OrderMessage> getByOrder(long id) {
+    	List<OrderMessage> orderMessages = serviceOrderMessage.consultar(id);
+    	return orderMessages;
+    }
+    
+    public List<OrderMessage> getByUser(long id) {
+    	List<OrderMessage> orderMessages = serviceOrderMessage.consultarPorUser(id);
+    	return orderMessages;
+    }
+    
     public void setLista(List<OrderMessage> lista) {
         this.lista = lista;
     }

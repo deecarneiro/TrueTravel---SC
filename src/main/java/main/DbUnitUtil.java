@@ -1,6 +1,9 @@
 package main;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -56,16 +59,15 @@ public class DbUnitUtil {
 		}
 	}
 
-	public static void main(String[] args) throws JsonMappingException, JsonProcessingException {
+	public static void main(String[] args) throws JsonMappingException, JsonProcessingException, NoSuchAlgorithmException, UnsupportedEncodingException {
 		
-		final String json = "{\"contentType\": \"foo\"}";
-		final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
-//		                              ^ 
-		// actually, try and *reuse* a single instance of ObjectMapper
 
-		if (node.has("contentType")) {
-		    System.out.println("contentType: " + node.get("contentType"));
-		}   
+		 String senha = "danita240697";
+
+         MessageDigest algorithm = MessageDigest.getInstance("MD5");
+         byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
+
+         System.out.println(messageDigest.toString());
 	}
 
 }

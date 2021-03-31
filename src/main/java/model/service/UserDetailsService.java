@@ -14,13 +14,14 @@ import javax.validation.executable.ExecutableType;
 import javax.validation.executable.ValidateOnExecution;
 
 import model.entities.UserDetails;
+import model.entities.UserSuper;
 
 /**
  *
  * @author deecarneiro
  */
 
-@LocalBean
+@Stateless
 public class UserDetailsService extends Servico<UserDetails> {
 
     @Override
@@ -50,4 +51,11 @@ public class UserDetailsService extends Servico<UserDetails> {
     public List<UserDetails> consultarEntidades() {
        return consultarEntidades( new Object[] {}, UserDetails.ALL_USER_DETAILS);
     }
+    
+    
+    @TransactionAttribute(SUPPORTS)
+	public UserDetails consultar(long id) {
+		return consultarEntidade(new Object[] { id }, UserDetails.USER_DETAILS_BY_ID);
+
+	}
 }

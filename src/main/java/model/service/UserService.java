@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+ * To change this license header, choose License Headers in UserSuper Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -13,7 +13,6 @@ import static javax.ejb.TransactionAttributeType.SUPPORTS;
 import javax.validation.executable.ExecutableType;
 import javax.validation.executable.ValidateOnExecution;
 
-import model.entities.ClientUser;
 import model.entities.Order;
 import model.entities.UserSuper;
 
@@ -21,48 +20,45 @@ import model.entities.UserSuper;
  *
  * @author deecarneiro
  */
-@LocalBean
-public class ClientService extends Servico<ClientUser> {
-	
+@Stateless
+public class UserService extends Servico<UserSuper> {
+
     @Override
-    public ClientUser criar() {
-        return new ClientUser();
+    public UserSuper criar() {
+        return new UserSuper();
     }
     
      @Override
-    public void persistir(ClientUser entidade) {
+    public void persistir(UserSuper entidade) {
         entityManager.persist(entidade);//To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ClientUser atualizar(ClientUser entidade) {
+    public UserSuper atualizar(UserSuper entidade) {
         entityManager.merge(entidade);
         entityManager.flush();
         return entidade;
     }
 
-    public void remover(ClientUser entidade) {
+    public void remover(UserSuper entidade) {
         entidade = entityManager.merge(entidade);
         entityManager.remove(entidade);
 
     }
 
     @TransactionAttribute(SUPPORTS)
-    public List<ClientUser> consultarEntidades() {
-       return consultarEntidades( new Object[] {}, ClientUser.ALL_CLIENTS);
+    public List<UserSuper> consultarEntidades() {
+       return consultarEntidades( new Object[] {}, UserSuper.ALL_USERS);
     }
     
     @TransactionAttribute(SUPPORTS)
-    public UserSuper consultar(int id) {
-        return consultarEntidade( new Object[] {id}, UserSuper.USER_BY_ID);
+	public UserSuper consultar(long id) {
+		return consultarEntidade(new Object[] { id }, UserSuper.USER_BY_ID);
 
-    }
-
+	}
+    
     @TransactionAttribute(SUPPORTS)
-    public ClientUser consultarEntidade(String senha, String login) {
-        return consultarEntidade( new Object[] {login,senha}, ClientUser.PASS_AND_LOGIN); //To change body of generated methods, choose Tools | Templates.
+    public UserSuper login(String username, String password) {
+    	return consultarEntidade(new Object[] {username, password}, UserSuper.LOGIN);
     }
-    
-    
-    
 }

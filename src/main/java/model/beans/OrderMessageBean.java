@@ -1,21 +1,12 @@
 package model.beans;
 
-import model.entities.Order;
-import model.entities.OrderMessage;
-
-import static javax.ejb.TransactionAttributeType.SUPPORTS;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+
+import model.entities.OrderMessage;
 import model.service.OrderMessageService;
 
 /**
@@ -42,8 +33,8 @@ public class OrderMessageBean{
     }
     
     public OrderMessage atualizar(OrderMessage order, int id) {
-    	model.entities.OrderMessage orderById = serviceOrderMessage.consultarId(id);
-    	return serviceOrderMessage.atualizar(orderById);
+    	OrderMessage orderById = serviceOrderMessage.consultarId(id);
+    	return serviceOrderMessage.atualizar(order);
     }
 
     public void remover(int id) {

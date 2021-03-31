@@ -1,15 +1,12 @@
 package model.service;
 
+import static javax.ejb.TransactionAttributeType.SUPPORTS;
+
 import java.util.List;
-import javax.ejb.LocalBean;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
-import static javax.ejb.TransactionAttributeType.SUPPORTS;
-import javax.validation.executable.ExecutableType;
-import javax.validation.executable.ValidateOnExecution;
 
-import model.service.Servico;
-import model.entities.Order;
 import model.entities.OrderMessage;
 
 /**

@@ -5,7 +5,6 @@
  */
 package model.webservice;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -15,11 +14,11 @@ import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.Produces;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
@@ -30,7 +29,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.beans.OrderMessageBean;
-import model.entities.Order;
 import model.entities.OrderMessage;
 
 /**
@@ -50,10 +48,10 @@ public class OrderMessageWebService {
 	public OrderMessage create(@Context HttpServletRequest request, String is) throws JsonMappingException, JsonProcessingException {
 		HttpSession session = request.getSession();
 		ObjectMapper mapper = new ObjectMapper();
-		OrderMessage orderMessage = mapper.readValue(is, OrderMessage.class);
-		orderMessageBean.salvar(orderMessage);
-		session.setAttribute("OrderMessage", orderMessage);
-		return orderMessage;
+		OrderMessage message = mapper.readValue(is, OrderMessage.class);
+		orderMessageBean.salvar(message);
+		session.setAttribute("UserSuper", message);
+		return message;
 	}
 
 	@GET

@@ -19,9 +19,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.criteria.Fetch;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import model.entities.*;
 
 /**
  *
@@ -64,13 +68,21 @@ public class OrderMessage extends Entidade implements Serializable {
     @Column(name="message")
     protected String message;
     
-    @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
-    @JoinColumn(name = "userId")
-    protected UserSuper userId;
+    @JoinColumn(name = "orderId", insertable = false, updatable = false)
+    @ManyToOne(targetEntity = Order.class, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Order order;
 
-    @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
-	@JoinColumn(name = "orderId")
-	protected Order orderId;
+    @Column(name = "orderId", insertable = true, updatable = true)
+    private Long orderId;
+    
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
+    @ManyToOne(targetEntity = UserSuper.class, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private UserSuper user;
+
+    @Column(name = "userId", insertable = true, updatable = true)
+    private Long userId;
 
 	public Long getId() {
 		return id;
@@ -88,20 +100,41 @@ public class OrderMessage extends Entidade implements Serializable {
 		this.message = message;
 	}
 
-	public UserSuper getUserId() {
-		return userId;
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setUserId(UserSuper userId) {
-		this.userId = userId;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
-	public Order getOrderId() {
+	public Long getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(Order orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
+	}
+
+	public UserSuper getUser() {
+		return user;
+	}
+
+	public void setUser(UserSuper user) {
+		this.user = user;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public OrderMessage() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -110,7 +143,9 @@ public class OrderMessage extends Entidade implements Serializable {
 		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
+		result = prime * result + ((order == null) ? 0 : order.hashCode());
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
@@ -134,10 +169,20 @@ public class OrderMessage extends Entidade implements Serializable {
 				return false;
 		} else if (!message.equals(other.message))
 			return false;
+		if (order == null) {
+			if (other.order != null)
+				return false;
+		} else if (!order.equals(other.order))
+			return false;
 		if (orderId == null) {
 			if (other.orderId != null)
 				return false;
 		} else if (!orderId.equals(other.orderId))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		if (userId == null) {
 			if (other.userId != null)
@@ -149,9 +194,9 @@ public class OrderMessage extends Entidade implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderMessage [id=" + id + ", message=" + message + ", userId=" + userId + ", orderId=" + orderId + "]";
+		return "OrderMessage [id=" + id + ", message=" + message + ", order=" + order + ", orderId=" + orderId
+				+ ", user=" + user + ", userId=" + userId + "]";
 	}
-
 
 	
     

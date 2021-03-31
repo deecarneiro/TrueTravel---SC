@@ -6,10 +6,12 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -17,6 +19,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -69,79 +73,18 @@ public class UserDetails  extends Entidade implements Serializable {
 	@Column(name="permission")
 	protected int permission;
 	
-	@OneToOne
-	@JoinColumn(name="userId")
-	protected UserSuper user;
+	@JoinColumn(name = "userId", insertable = false, updatable = false)
+    @OneToOne(targetEntity = UserSuper.class, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private UserSuper user;
 
-  
+    @Column(name = "userId", insertable = true, updatable = true)
+    private Long userId;
+
 	public UserDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
-	public String getPassport() {
-		return passport;
-	}
-
-	public void setPassport(String passport) {
-		this.passport = passport;
-	}
-
-	public String getRg() {
-		return rg;
-	}
-
-	public void setRg(String rg) {
-		this.rg = rg;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public int getPermission() {
-		return permission;
-	}
-
-	public void setPermission(int permission) {
-		this.permission = permission;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-
-	public UserSuper getUser() {
-		return user;
-	}
-
-
-	public void setUser(UserSuper user) {
-		this.user = user;
-	}
-
 
 	@Override
 	public int hashCode() {
@@ -154,9 +97,9 @@ public class UserDetails  extends Entidade implements Serializable {
 		result = prime * result + ((photo == null) ? 0 : photo.hashCode());
 		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -199,18 +142,20 @@ public class UserDetails  extends Entidade implements Serializable {
 				return false;
 		} else if (!user.equals(other.user))
 			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
 		return true;
 	}
-
 
 	@Override
 	public String toString() {
 		return "UserDetails [id=" + id + ", photo=" + photo + ", passport=" + passport + ", rg=" + rg + ", cpf=" + cpf
-				+ ", permission=" + permission + ", user=" + user + "]";
+				+ ", permission=" + permission + ", user=" + user + ", userId=" + userId + "]";
 	}
 
-	
-	
-	
-	
+  
+
 }

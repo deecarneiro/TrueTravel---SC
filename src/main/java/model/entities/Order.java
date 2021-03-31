@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -78,9 +81,19 @@ public class Order extends Entidade implements Serializable {
 	@Column(name = "status")
 	protected int status;
 	
-	@JoinColumn(name="projectId")
-	protected Project project;
-	
+	@JoinColumn(name = "projectId", insertable = false, updatable = false)
+    @ManyToOne(targetEntity = Project.class, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Project project;
+
+    @Column(name = "projectId", insertable = true, updatable = true)
+    private Long projectId;
+
+	public Order() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -89,12 +102,12 @@ public class Order extends Entidade implements Serializable {
 		this.id = id;
 	}
 
-	public UserSuper getUserSuper() {
+	public model.entities.UserSuper getUserSuper() {
 		return UserSuper;
 	}
 
-	public void setUserSuper(UserSuper UserSuper) {
-		this.UserSuper = UserSuper;
+	public void setUserSuper(model.entities.UserSuper userSuper) {
+		UserSuper = userSuper;
 	}
 
 	public String getDestination() {
@@ -161,6 +174,14 @@ public class Order extends Entidade implements Serializable {
 		this.project = project;
 	}
 
+	public Long getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -176,6 +197,7 @@ public class Order extends Entidade implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((origin == null) ? 0 : origin.hashCode());
 		result = prime * result + ((project == null) ? 0 : project.hashCode());
+		result = prime * result + ((projectId == null) ? 0 : projectId.hashCode());
 		result = prime * result + status;
 		return result;
 	}
@@ -231,6 +253,11 @@ public class Order extends Entidade implements Serializable {
 				return false;
 		} else if (!project.equals(other.project))
 			return false;
+		if (projectId == null) {
+			if (other.projectId != null)
+				return false;
+		} else if (!projectId.equals(other.projectId))
+			return false;
 		if (status != other.status)
 			return false;
 		return true;
@@ -240,8 +267,9 @@ public class Order extends Entidade implements Serializable {
 	public String toString() {
 		return "Order [id=" + id + ", UserSuper=" + UserSuper + ", destination=" + destination + ", origin=" + origin
 				+ ", departureDate=" + departureDate + ", arrivalDate=" + arrivalDate + ", agencyName=" + agencyName
-				+ ", cost=" + cost + ", status=" + status + ", project=" + project + "]";
+				+ ", cost=" + cost + ", status=" + status + ", project=" + project + ", projectId=" + projectId + "]";
 	}
-
+    
+    
 
 }

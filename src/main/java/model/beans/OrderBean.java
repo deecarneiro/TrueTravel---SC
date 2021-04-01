@@ -59,6 +59,12 @@ public class OrderBean{
     	return orders;
     }
     
+    public List<Order> getByStatus(int id) {
+    	List<Order> orders = serviceOrder.consultarPorStatus(id);
+    	return orders;
+    }
+    
+    
     public Order getById(long id) {
     	Order = serviceOrder.consultar(id);
     	return Order;

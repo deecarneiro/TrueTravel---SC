@@ -37,7 +37,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @NamedQueries({ @NamedQuery(name = Order.ALL_ORDERS, query = "SELECT o FROM Order o"),
 		@NamedQuery(name = Order.ORDER_BY_ID, query = "SELECT o FROM Order o WHERE o.id = ?1"),
 		@NamedQuery(name = Order.ORDER_BY_ID_PROJECT, query = "SELECT o FROM Order o WHERE o.projectId = ?1"),
-		@NamedQuery(name = Order.ORDER_BY_ID_USER, query = "SELECT o FROM Order o WHERE o.userId = ?1") })
+		@NamedQuery(name = Order.ORDER_BY_ID_USER, query = "SELECT o FROM Order o WHERE o.userId = ?1"),
+		@NamedQuery(name = Order.ORDER_BY_STATUS, query = "SELECT o FROM Order o WHERE o.status = ?1")})
 public class Order extends Entidade implements Serializable {
 	/**
 	 * 
@@ -47,6 +48,7 @@ public class Order extends Entidade implements Serializable {
 	public static final String ORDER_BY_ID = "Order_By_Id";
 	public static final String ORDER_BY_ID_PROJECT = "Order_By_Id_Project";
 	public static final String ORDER_BY_ID_USER = "Order_By_Id_User";
+	public static final String ORDER_BY_STATUS = "Order_By_Status";
 
 	@Id
 	@Column(name = "id")

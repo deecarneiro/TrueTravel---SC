@@ -56,4 +56,10 @@ public class ProjectService extends Servico<Project> {
 		return consultarEntidade(new Object[] { id }, Project.PROJECT_BY_ID);
 
 	}
+    
+    @TransactionAttribute(SUPPORTS)
+	public List<Project> consultarName(String name) {
+		return pesquisar(name, "name", Project.PROJECT_BY_NAME);
+
+	}
 }

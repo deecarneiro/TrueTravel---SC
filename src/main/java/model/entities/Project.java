@@ -34,7 +34,10 @@ import org.hibernate.validator.constraints.NotBlank;
              @NamedQuery(
                     name = Project.PROJECT_BY_ID,
                     query = "SELECT p FROM Project p WHERE p.id = ?1"
-            )
+            ),
+            @NamedQuery(
+            		name=Project.PROJECT_BY_NAME,
+            		query= "SELECT p FROM Project p WHERE p.name LIKE :name")
         }
 )
 public class Project  extends Entidade implements Serializable {
@@ -44,7 +47,8 @@ public class Project  extends Entidade implements Serializable {
 	 */
 	private static final long serialVersionUID = -4533649529217112074L;
 	public static final String ALL_PROJECTS = "All_Project";
-    public static final String PROJECT_BY_ID= "Project_By_Id";
+    public static final String PROJECT_BY_ID = "Project_By_Id";
+    public static final String PROJECT_BY_NAME = "Project_By_Name";
 
 
     @Id

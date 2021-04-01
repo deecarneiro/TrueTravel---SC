@@ -91,4 +91,13 @@ public abstract class Servico<T extends Entidade> {
 
         return query.getResultList();
     }
+    
+    @TransactionAttribute(SUPPORTS)
+    protected List<T> pesquisar(String valor,String parametro, String nomeQuery) {
+        TypedQuery<T> query = entityManager.createNamedQuery(nomeQuery, classe);
+
+            query.setParameter(parametro, "%" + valor + "%");
+
+        return query.getResultList();
+    }
 }

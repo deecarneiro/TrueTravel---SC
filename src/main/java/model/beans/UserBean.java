@@ -37,8 +37,10 @@ public class UserBean{
         return entidade;
     }
     
-    public UserSuper atualizar(UserSuper order, int id) {
+    public UserSuper atualizar(UserSuper order, int id) throws NoSuchAlgorithmException {
     	UserSuper userById = serviceUser.consultar(id);
+    	String password = UserUtils.md5(order.getPassword());
+    	order.setPassword(password);
     	return serviceUser.atualizar(order);
     }
     

@@ -107,7 +107,7 @@ public class UserWebService {
 	@PUT
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public UserSuper update(@Context HttpServletRequest request, @PathParam("id") int id, String jsonString) throws JsonMappingException, JsonProcessingException {
+	public UserSuper update(@Context HttpServletRequest request, @PathParam("id") int id, String jsonString) throws JsonMappingException, JsonProcessingException, NoSuchAlgorithmException {
 		HttpSession session = request.getSession();
 		ObjectMapper mapper = new ObjectMapper();
 		UserSuper usernew = mapper.readValue(jsonString, UserSuper.class);

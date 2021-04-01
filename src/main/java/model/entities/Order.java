@@ -35,7 +35,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "TB_ORDER")
 @DiscriminatorValue(value = "o")
 @NamedQueries({ @NamedQuery(name = Order.ALL_ORDERS, query = "SELECT o FROM Order o"),
-		@NamedQuery(name = Order.ORDER_BY_ID, query = "SELECT o FROM Order o WHERE o.id = ?1") })
+		@NamedQuery(name = Order.ORDER_BY_ID, query = "SELECT o FROM Order o WHERE o.id = ?1"),
+		@NamedQuery(name = Order.ORDER_BY_ID_PROJECT, query = "SELECT o FROM Order o WHERE o.projectId = ?1"),
+		@NamedQuery(name = Order.ORDER_BY_ID_USER, query = "SELECT o FROM Order o WHERE o.userId = ?1") })
 public class Order extends Entidade implements Serializable {
 	/**
 	 * 
@@ -43,6 +45,8 @@ public class Order extends Entidade implements Serializable {
 	private static final long serialVersionUID = -4533649529217112074L;
 	public static final String ALL_ORDERS = "All_Orders";
 	public static final String ORDER_BY_ID = "Order_By_Id";
+	public static final String ORDER_BY_ID_PROJECT = "Order_By_Id_Project";
+	public static final String ORDER_BY_ID_USER = "Order_By_Id_User";
 
 	@Id
 	@Column(name = "id")
@@ -60,8 +64,7 @@ public class Order extends Entidade implements Serializable {
 	@NotBlank
 	@Column(name = "origin")
 	protected String origin;
-	
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "departureDate")
 	protected Date departureDate;
@@ -80,14 +83,22 @@ public class Order extends Entidade implements Serializable {
 
 	@Column(name = "status")
 	protected int status;
-	
-	@JoinColumn(name = "projectId", insertable = false, updatable = false)
-    @ManyToOne(targetEntity = Project.class, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Project project;
 
-    @Column(name = "projectId", insertable = true, updatable = true)
-    private Long projectId;
+	@JoinColumn(name = "projectId", insertable = false, updatable = false)
+	@ManyToOne(targetEntity = Project.class, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Project project;
+
+	@Column(name = "projectId", insertable = true, updatable = true)
+	private Long projectId;
+
+	@JoinColumn(name = "userId", insertable = false, updatable = false)
+	@ManyToOne(targetEntity = UserSuper.class, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private UserSuper user;
+
+	@Column(name = "userId", insertable = true, updatable = true)
+	private Long userId;
 
 	public Order() {
 		super();
@@ -182,6 +193,22 @@ public class Order extends Entidade implements Serializable {
 		this.projectId = projectId;
 	}
 
+	public UserSuper getUser() {
+		return user;
+	}
+
+	public void setUser(UserSuper user) {
+		this.user = user;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -199,6 +226,8 @@ public class Order extends Entidade implements Serializable {
 		result = prime * result + ((project == null) ? 0 : project.hashCode());
 		result = prime * result + ((projectId == null) ? 0 : projectId.hashCode());
 		result = prime * result + status;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -260,6 +289,16 @@ public class Order extends Entidade implements Serializable {
 			return false;
 		if (status != other.status)
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
 		return true;
 	}
 
@@ -267,9 +306,8 @@ public class Order extends Entidade implements Serializable {
 	public String toString() {
 		return "Order [id=" + id + ", UserSuper=" + UserSuper + ", destination=" + destination + ", origin=" + origin
 				+ ", departureDate=" + departureDate + ", arrivalDate=" + arrivalDate + ", agencyName=" + agencyName
-				+ ", cost=" + cost + ", status=" + status + ", project=" + project + ", projectId=" + projectId + "]";
+				+ ", cost=" + cost + ", status=" + status + ", project=" + project + ", projectId=" + projectId
+				+ ", user=" + user + ", userId=" + userId + "]";
 	}
-    
-    
 
 }

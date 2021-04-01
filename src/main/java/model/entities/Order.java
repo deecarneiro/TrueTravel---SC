@@ -53,10 +53,6 @@ public class Order extends Entidade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	protected model.entities.UserSuper UserSuper;
-
 	@NotBlank
 	@Column(name = "destination")
 	protected String destination;
@@ -111,14 +107,6 @@ public class Order extends Entidade implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public model.entities.UserSuper getUserSuper() {
-		return UserSuper;
-	}
-
-	public void setUserSuper(model.entities.UserSuper userSuper) {
-		UserSuper = userSuper;
 	}
 
 	public String getDestination() {
@@ -213,7 +201,6 @@ public class Order extends Entidade implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((UserSuper == null) ? 0 : UserSuper.hashCode());
 		result = prime * result + ((agencyName == null) ? 0 : agencyName.hashCode());
 		result = prime * result + ((arrivalDate == null) ? 0 : arrivalDate.hashCode());
 		long temp;
@@ -240,11 +227,6 @@ public class Order extends Entidade implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		if (UserSuper == null) {
-			if (other.UserSuper != null)
-				return false;
-		} else if (!UserSuper.equals(other.UserSuper))
-			return false;
 		if (agencyName == null) {
 			if (other.agencyName != null)
 				return false;
@@ -304,10 +286,12 @@ public class Order extends Entidade implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", UserSuper=" + UserSuper + ", destination=" + destination + ", origin=" + origin
-				+ ", departureDate=" + departureDate + ", arrivalDate=" + arrivalDate + ", agencyName=" + agencyName
-				+ ", cost=" + cost + ", status=" + status + ", project=" + project + ", projectId=" + projectId
-				+ ", user=" + user + ", userId=" + userId + "]";
+		return "Order [id=" + id + ", destination=" + destination + ", origin=" + origin + ", departureDate="
+				+ departureDate + ", arrivalDate=" + arrivalDate + ", agencyName=" + agencyName + ", cost=" + cost
+				+ ", status=" + status + ", project=" + project + ", projectId=" + projectId + ", user=" + user
+				+ ", userId=" + userId + "]";
 	}
+
+	
 
 }

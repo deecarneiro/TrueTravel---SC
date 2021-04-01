@@ -93,7 +93,15 @@ public class OrderWebService {
 		return orders;
 	}
 	
-	
+	@GET
+	@Path("status/{status}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Order> getByStatus(@Context HttpServletRequest request, @PathParam("status") int status) {
+		HttpSession session = request.getSession();
+		List<Order> orders = orderBean.getByStatus(status);
+		session.setAttribute("Order", orders);
+		return orders;
+	}
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)

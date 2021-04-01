@@ -54,6 +54,11 @@ public class ProjectBean{
     	return Project;
     }
     
+    public List<Project> getByName(String name) {
+    	lista = serviceProject.consultarName(name);
+    	return lista;
+    }
+    
     public void setLista(List<Project> lista) {
         this.lista = lista;
     }

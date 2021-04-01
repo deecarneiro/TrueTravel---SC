@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import model.entities.Order;
+import model.entities.OrderMessage;
 import model.service.OrderService;
 /**
  *
@@ -46,6 +47,23 @@ public class OrderBean{
         lista = serviceOrder.consultarEntidades();
         return lista;
     }
+    
+    
+    public List<Order> getByProject(long id) {
+    	List<Order> orders = serviceOrder.consultarPorProjeto(id);
+    	return orders;
+    }
+    
+    public List<Order> getByUser(long id) {
+    	List<Order> orders = serviceOrder.consultarPorUser(id);
+    	return orders;
+    }
+    
+    public List<Order> getByStatus(int id) {
+    	List<Order> orders = serviceOrder.consultarPorStatus(id);
+    	return orders;
+    }
+    
     
     public Order getById(long id) {
     	Order = serviceOrder.consultar(id);

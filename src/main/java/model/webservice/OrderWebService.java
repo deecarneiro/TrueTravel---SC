@@ -74,6 +74,35 @@ public class OrderWebService {
 	}
 
 	@GET
+	@Path("user/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Order> getByUser(@Context HttpServletRequest request, @PathParam("id") long id) {
+		HttpSession session = request.getSession();
+		List<Order> orders = orderBean.getByUser(id);
+		session.setAttribute("Order", orders);
+		return orders;
+	}
+	
+	@GET
+	@Path("project/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Order> getByProject(@Context HttpServletRequest request, @PathParam("id") long id) {
+		HttpSession session = request.getSession();
+		List<Order> orders = orderBean.getByProject(id);
+		session.setAttribute("Order", orders);
+		return orders;
+	}
+	
+	@GET
+	@Path("status/{status}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Order> getByStatus(@Context HttpServletRequest request, @PathParam("status") int status) {
+		HttpSession session = request.getSession();
+		List<Order> orders = orderBean.getByStatus(status);
+		session.setAttribute("Order", orders);
+		return orders;
+	}
+	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Order getById(@Context HttpServletRequest request, @PathParam("id") long id) {

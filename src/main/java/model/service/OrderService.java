@@ -52,4 +52,22 @@ public class OrderService extends Servico<Order> {
 		return consultarEntidade(new Object[] { id }, Order.ORDER_BY_ID);
 
 	}
+	
+	@TransactionAttribute(SUPPORTS)
+	public List<Order> consultarPorProjeto(long id) {
+		return consultarEntidades(new Object[] { id }, Order.ORDER_BY_ID_PROJECT);
+
+	}
+	
+	@TransactionAttribute(SUPPORTS)
+	public List<Order>  consultarPorUser(long id) {
+		return consultarEntidades(new Object[] { id }, Order.ORDER_BY_ID_USER);
+
+	}
+	
+	@TransactionAttribute(SUPPORTS)
+	public List<Order>  consultarPorStatus(int status) {
+		return consultarEntidades(new Object[] { status }, Order.ORDER_BY_STATUS);
+
+	}
 }

@@ -76,6 +76,16 @@ public class ProjectWebService {
 		session.setAttribute("Project", project);
 		return project;
 	}
+	
+	@GET
+	@Path("search/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Project> getByName(@Context HttpServletRequest request, @PathParam("name") String name) {
+		HttpSession session = request.getSession();
+		List<Project> projects = projectBean.getByName(name);
+		session.setAttribute("Project", projects);
+		return projects;
+	}
 
 	@PUT
 	@Path("{id}")

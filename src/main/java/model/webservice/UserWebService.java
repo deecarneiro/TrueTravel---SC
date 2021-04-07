@@ -99,6 +99,7 @@ public class UserWebService {
 
 	}
 
+	@Authorize
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -109,6 +110,7 @@ public class UserWebService {
 		return user;
 	}
 
+	@Authorize
 	@PUT
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -123,6 +125,7 @@ public class UserWebService {
 		return usernew;
 	}
 
+	@Authorize
 	@DELETE
 	@Path("{id}")
 	public void remove(@Context HttpServletRequest request, @PathParam("id") int id) {

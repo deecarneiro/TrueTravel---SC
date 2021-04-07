@@ -5,8 +5,6 @@
  */
 package model.webservice;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -15,12 +13,12 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
@@ -32,7 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.beans.ProjectBean;
 import model.entities.Project;
-import model.entities.Project;
+import utils.Authorize;
 /**
  * REST Web Service
  *
@@ -44,6 +42,7 @@ public class ProjectWebService {
 	@EJB
 	private ProjectBean projectBean;
 	
+	@Authorize
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -56,7 +55,8 @@ public class ProjectWebService {
 		session.setAttribute("Project", project);
 		return project;
 	}
-
+	
+	@Authorize
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Project> list(@Context HttpServletRequest request) {
@@ -67,6 +67,7 @@ public class ProjectWebService {
 
 	}
 
+	@Authorize
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -77,6 +78,7 @@ public class ProjectWebService {
 		return project;
 	}
 	
+	@Authorize
 	@GET
 	@Path("search/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -87,6 +89,7 @@ public class ProjectWebService {
 		return projects;
 	}
 
+	@Authorize
 	@PUT
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -99,6 +102,7 @@ public class ProjectWebService {
 		return projectnew;
 	}
 
+	@Authorize
 	@DELETE
 	@Path("{id}")
 	public void remove(@Context HttpServletRequest request, @PathParam("id") int id) {

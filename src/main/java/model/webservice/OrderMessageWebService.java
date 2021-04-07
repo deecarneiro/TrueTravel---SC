@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.beans.OrderMessageBean;
 import model.entities.OrderMessage;
+import utils.Authorize;
 
 /**
  * REST Web Service
@@ -42,6 +43,7 @@ public class OrderMessageWebService {
 	@EJB
 	private OrderMessageBean orderMessageBean;
 	
+	@Authorize
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -54,6 +56,7 @@ public class OrderMessageWebService {
 		return message;
 	}
 
+	@Authorize
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<OrderMessage> list(@Context HttpServletRequest request) {
@@ -63,6 +66,7 @@ public class OrderMessageWebService {
 		return orderMessages;
 	}
 
+	@Authorize
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -73,6 +77,7 @@ public class OrderMessageWebService {
 		return orderMessage;
 	}
 	
+	@Authorize
 	@GET
 	@Path("order/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -83,6 +88,7 @@ public class OrderMessageWebService {
 		return orderMessage;
 	}
 	
+	@Authorize
 	@GET
 	@Path("user/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -93,6 +99,7 @@ public class OrderMessageWebService {
 		return orderMessage;
 	}
 
+	@Authorize
 	@PUT
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -104,7 +111,8 @@ public class OrderMessageWebService {
 		session.setAttribute("Order", orderMessagenew);
 		return orderMessagenew;
 	}
-
+	
+	@Authorize
 	@DELETE
 	@Path("{id}")
 	public void remove(@Context HttpServletRequest request, @PathParam("id") int id) {

@@ -37,6 +37,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import model.beans.UserBean;
 import model.entities.UserDetails;
 import model.entities.UserSuper;
+import utils.Authorize;
+import utils.UserUtils;
 /**
  * REST Web Service
  *
@@ -77,6 +79,7 @@ public class UserWebService {
 			user = UserBean.login(username, password);
 			Date rightNow = Calendar.getInstance().getTime(); 	
 			user.setLastLogin(rightNow);
+			user.setToken(UserUtils.generateToken(user));		
 			UserBean.atualizar(user, user.getId());
 		}  
 		
@@ -84,6 +87,8 @@ public class UserWebService {
 		return user;
 	}
 
+
+	@Authorize
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<UserSuper> list(@Context HttpServletRequest request) {

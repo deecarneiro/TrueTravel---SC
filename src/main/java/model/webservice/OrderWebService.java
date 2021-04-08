@@ -7,36 +7,30 @@ package model.webservice;
 
 import java.util.List;
 
-import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.Produces;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import model.beans.OrderBean;
-import model.entities.Order;
-import model.service.OrderService;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import model.beans.OrderBean;
+import model.entities.Order;
+import utils.Authorize;
 
 /**
  * REST Web Service
@@ -50,6 +44,7 @@ public class OrderWebService {
 	@EJB
 	private OrderBean orderBean;
 
+	@Authorize
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -63,6 +58,7 @@ public class OrderWebService {
 		return order;
 	}
 
+	@Authorize
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Order> list(@Context HttpServletRequest request) {
@@ -73,6 +69,7 @@ public class OrderWebService {
 
 	}
 
+	@Authorize
 	@GET
 	@Path("user/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -83,6 +80,7 @@ public class OrderWebService {
 		return orders;
 	}
 	
+	@Authorize
 	@GET
 	@Path("project/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -93,6 +91,7 @@ public class OrderWebService {
 		return orders;
 	}
 	
+	@Authorize
 	@GET
 	@Path("status/{status}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -102,6 +101,8 @@ public class OrderWebService {
 		session.setAttribute("Order", orders);
 		return orders;
 	}
+	
+	@Authorize
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -112,6 +113,7 @@ public class OrderWebService {
 		return order;
 	}
 
+	@Authorize
 	@PUT
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -124,6 +126,7 @@ public class OrderWebService {
 		return ordernew;
 	}
 
+	@Authorize
 	@DELETE
 	@Path("{id}")
 	public void remove(@Context HttpServletRequest request, @PathParam("id") int id) {

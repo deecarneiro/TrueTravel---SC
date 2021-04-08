@@ -46,8 +46,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 		{ 
 		@NamedQuery(name = UserSuper.ALL_USERS, query = "SELECT us FROM UserSuper us"),
 		@NamedQuery(name = UserSuper.USER_BY_ID, query = "SELECT us FROM UserSuper us WHERE us.id = ?1"),
-		@NamedQuery(name = UserSuper.LOGIN, query = "SELECT us FROM UserSuper us WHERE us.username = ?1 AND us.password = ?2 "), }
-
+		@NamedQuery(name = UserSuper.LOGIN, query = "SELECT us FROM UserSuper us WHERE us.username = ?1 AND us.password = ?2 "), 
+		@NamedQuery(name = UserSuper.AUTH, query = "SELECT us FROM UserSuper us WHERE us.token = ?1")
+		}
 )
 public class UserSuper extends Entidade implements Serializable {
     
@@ -58,7 +59,8 @@ public class UserSuper extends Entidade implements Serializable {
 	public static final String ALL_USERS = "All_Users";
 	public static final String USER_BY_ID = "User_By_Id";
 	public static final String LOGIN = "User_Login";
-	
+	public static final String AUTH = "User_AUTH";
+
 	@Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.AUTO)

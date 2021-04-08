@@ -33,7 +33,7 @@ public final class UserUtils {
 			    .setIssuedAt(new Date())
 			    .setExpiration(
 			        Date.from(
-			            LocalDateTime.now().plusMinutes(15L)
+			            LocalDateTime.now().plusDays(3L)
 			                .atZone(ZoneId.systemDefault())
 			            .toInstant()))
 			    .signWith(CHAVE, SignatureAlgorithm.HS512)

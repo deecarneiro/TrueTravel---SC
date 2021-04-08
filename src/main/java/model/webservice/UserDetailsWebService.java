@@ -5,8 +5,6 @@
  */
 package model.webservice;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -32,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.beans.UserDetailsBean;
 import model.entities.UserDetails;
+import utils.Authorize;
 /**
  * REST Web Service
  *
@@ -42,7 +41,8 @@ public class UserDetailsWebService {
 
 	@EJB
 	private UserDetailsBean UserDetailsBean;
-		
+	
+	@Authorize
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -56,6 +56,7 @@ public class UserDetailsWebService {
 		return details;
 	}
 
+	@Authorize
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<UserDetails> list(@Context HttpServletRequest request) {
@@ -66,6 +67,7 @@ public class UserDetailsWebService {
 
 	}
 
+	@Authorize
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -76,6 +78,7 @@ public class UserDetailsWebService {
 		return details;
 	}
 
+	@Authorize
 	@PUT
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -88,6 +91,7 @@ public class UserDetailsWebService {
 		return detailsnew;
 	}
 
+	@Authorize
 	@DELETE
 	@Path("{id}")
 	public void remove(@Context HttpServletRequest request, @PathParam("id") int id) {

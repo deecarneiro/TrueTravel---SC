@@ -80,7 +80,7 @@ public class UserWebService {
 			Date rightNow = Calendar.getInstance().getTime(); 	
 			user.setLastLogin(rightNow);
 			user.setToken(UserUtils.generateToken(user));		
-			UserBean.atualizar(user, user.getId());
+			UserBean.atualizarLogin(user, user.getId());
 		}  
 		
 		session.setAttribute("UserSuper", user);

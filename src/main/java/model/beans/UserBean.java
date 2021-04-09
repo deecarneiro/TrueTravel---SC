@@ -38,10 +38,10 @@ public class UserBean{
     }
     
     public UserSuper atualizar(UserSuper order, int id) throws NoSuchAlgorithmException {
-    	UserSuper userById = serviceUser.consultar(id);
     	String password = UserUtils.md5(order.getPassword());
     	order.setPassword(password);
-    	return serviceUser.atualizar(order);
+    	serviceUser.atualizar(order);
+    	return order;
     }
     
     public void remover(int id) {
@@ -60,8 +60,9 @@ public class UserBean{
     }
     
     public UserSuper login(String username, String password) throws NoSuchAlgorithmException {
-    	String senhaCripto = UserUtils.md5(password);
-    	UserSuper = serviceUser.login(username, senhaCripto);
+    	String senhaCripto = userUtils.md5(password);
+    	UserSuper user = serviceUser.login(username, senhaCripto);
+    	UserSuper = serviceUser.consultar(user.getId());
     	return UserSuper;
     }
     
@@ -84,5 +85,9 @@ public class UserBean{
     	return serviceUser.atualizar(user);	
 	}
     
+	public UserSuper atualizarLogin(UserSuper user, Long id) throws NoSuchAlgorithmException {
+		UserSuper userById = serviceUser.consultar(id);
+    	return serviceUser.atualizar(user);	
+	}
 
 }
